@@ -1,0 +1,42 @@
+
+  
+<div class="container">
+    <div class="text-center  bg-mario">
+      <br>
+      <br>
+        <h2 class="text-center amatic">Support Chip</h2>
+      </br>
+      <br>
+    </div>
+
+      <%= form_with model: @support, local:true, class:"contact-form row" do |form| %>
+        <div class="col-12">
+          <br>
+          <br>
+          <%= form.text_area :message, id: "title", class: "input-text js-input"  %>
+          <label class="label text-center" for="name">Message</label>
+        </div>
+
+        <div class="form-field col-12">
+          <%= form.number_field :point, id: "caption", class: "input-text js-input"%>
+          <label class="label" for="message">Point</label>
+        </div>
+        <%= form.hidden_field :post_id, :value => @post.id %>
+        <div class="form-field col-12 align-center">
+          
+          <%= form.submit "Submit", class: "submit-btn" %>
+        </div>
+
+        
+
+        <hr>
+        
+        
+      <% end %>
+  
+</div>
+    
+  
+
+
+<%= javascript_pack_tag 'post' %>

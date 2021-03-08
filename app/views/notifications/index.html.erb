@@ -1,0 +1,22 @@
+<div class="container">    
+    <div class="text-center  bg-mario">
+        <br>
+        <br>
+        <h2 class="text-center amatic">Notice</h2>
+        </br>
+        <br>
+    </div>
+    
+        <%= link_to notification_path(current_user), method: :delete do %>
+            <i class="fas fa-trash" style="color: black;"></i>
+            <h7 style="color: black;">全削除</h7>
+        <% end %>
+        <hr>
+    <% if @notifications.exists? %>
+        <div class="users-index">
+            <%= render @notifications %>
+        </div>
+    <% else %>
+        <p>通知はありません</p>
+    <% end %>
+</div>

@@ -1,0 +1,35 @@
+<div class="container">
+  <h2 class="text-center">ノルマ</h2>
+    <div class="container">
+      <div class="form-group text-center">
+        <h6>依頼内容</h6>
+        
+        <h4><%= @right.content %></h4>
+      </div>
+      <div class="text-center">
+        <h6>現在の共感数:</h6>
+        <h3><%= @right.sympathies.length %></h3>
+      </div>
+      <%= form_with model: @criterion, local:true, class:"contact-form row" do |form| %>
+        <div class="col-12">
+          <%= form.number_field :sp, class: "input-text js-input text-center" %>
+          <label class="label text-center" for="name">ノルマ</label>
+        </div>
+        <%= form.hidden_field :right_id, :value => @right.id %>
+        <div class="form-field col-12 align-center">
+          
+          <%= form.submit "Submit", class: "submit-btn" %>
+        </div>
+
+        
+
+        <hr>
+        
+        
+      <% end %>
+    </div>
+  
+</div>
+
+
+<%= javascript_pack_tag 'post' %>

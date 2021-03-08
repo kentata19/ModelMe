@@ -1,0 +1,44 @@
+
+<div class="container">
+    
+  <nav>
+    
+    <%= link_to "", root_path, class: "navbar__brand navbar__mainLogo","data-turbolinks": false %>
+    <div class="menu">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="/posts">ホーム</a></li>
+        <% if current_user %>
+          <li><%= link_to "マイページ", user_path(current_user),"data-turbolinks": false %></li>
+        <% else %>
+          <li><a href="/users/sign_up">サインイン</a></li>
+        <% end %>
+        <% if current_user %>
+          <li><%= link_to "サインアウト", destroy_user_session_path, method: :delete %></li>
+        <% end %>
+        <li><%= link_to "新規投稿", new_post_path,"data-turbolinks": false %></li>
+        <% if current_user %>
+          <% if unchecked_notifications.any? %>
+              <li>
+                  <%= link_to "通知", notifications_path %>
+              </li>
+              <i class="fa fa-circle" style="color: gold;"></i>
+          <% else %>
+              <li>
+                  <%= link_to "通知", notifications_path %>
+              </li>
+          <% end %>
+        <% end %>
+        <li><%= link_to "プロフィール編集", edit_user_registration_path, "data-turbolinks": false %></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+
+  </nav>
+  
+</div>
+
+<%= javascript_pack_tag 'navbar' %>

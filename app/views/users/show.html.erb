@@ -1,0 +1,79 @@
+
+  <div class="text-center bg-mario">
+    
+    <br>
+    <h3 class="amatic"><%= @user.name%></h3>
+    </br>
+    <small class=><%= @user.info%></small>
+    <div class="text-center">
+      <br>
+      
+                    
+                    
+                    
+      <% if @user.profile_photo.attached? %>
+
+        <%= image_tag @user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "round-img-show" %>
+      <% else %>
+        <img src="/assets/avatar.png" class="round-img-show" />
+      <% end %>
+      
+    </div>
+    <% if current_user != @user %>
+      <%= render 'relationships/follow_button', user: @user %>
+    <% else %>
+      <br>
+        <%= link_to "プロフィール編集", edit_user_registration_path, "data-turbolinks": false, class: "button" %>
+      </br>
+    <% end %>
+  </div>
+
+
+<br>
+<br>
+<div id = "row-padding">
+  <div class="row">
+    <div class="col-lg-2 col-12">
+      <p class="sample"></p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= link_to "投稿した作品", user_path(@user),class: "black-color cf no-text-decoration"%></li>
+        <li class="list-group-item"><%= link_to "共感購入した作品", user_sympathy_path(@user),class: "black-color cf no-text-decoration"%></li>
+        <li class="list-group-item"><%= link_to "権利購入した作品", user_right_path(@user),class: "black-color cf no-text-decoration"%></li>
+        <li class="list-group-item"><%= link_to "注文依頼一覧", user_wish_path(@user),class: "black-color cf no-text-decoration"%></li>
+      </ul>
+    </div>
+    <div class="col-lg-10 col-12">
+      <div class="text-center">
+        
+        <br>
+        
+        <div class="card-group">
+          <% @posts.each do |obj| %>
+            
+            <div class="col-lg-3 col-4">
+                
+                  <div class="card border-blue">
+                    
+                    
+                    <%= link_to post_path(obj) do %>
+                      <% if obj.images.attached? %>
+                        <%= image_tag obj.images.first.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                      <% end %>
+                    <% end %>
+                    
+                    
+                  </div>
+                
+            </div>
+                          
+          <% end %>
+          
+        </div> 
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<%= javascript_pack_tag 'effect' %>

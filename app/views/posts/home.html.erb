@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jawat</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  </head>
+
+  <body>
+    
+    <div id="wrapper">
+      
+
+      <% if flash[:notice] %>
+        <div class="alert alert-info"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger"><%= flash[:alert] %></div>
+      <% end %>
+      
+      
+      
+      <div id="preloader">
+          <div id="status" class="la-ball-triangle-path">
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+      </div>
+      <div class="page-border" data-wow-duration="0.7s" data-wow-delay="0.2s">
+          <div class="top-border wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;"></div>
+          <div class="right-border wow fadeInRight animated" style="visibility: visible; animation-name: fadeInRight;"></div>
+          <div class="bottom-border wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;"></div>
+          <div class="left-border wow fadeInLeft animated" style="visibility: visible; animation-name: fadeInLeft;"></div>
+      </div>
+  
+      <div id="wrapper">
+      
+        <header id="banner" class="scrollto clearfix" data-enllax-ratio=".5">
+          <div class="container">
+            <div class='fixed-top'>   
+              <nav>
+                
+                <%= link_to "", root_path, class: "navbar__brand navbar__mainLogo","data-turbolinks": false %>
+                <div class="menu">
+                    <div class="bar bar1"></div>
+                    <div class="bar bar2"></div>
+                    <div class="bar bar3"></div>
+                </div>
+      
+                <ul class="nav-links">
+                    <li><a href="/posts">ホーム</a></li>
+                    <% if current_user %>
+                      <li><a href="/users/<%= current_user.id%>">プロフィール</a></li>
+                    <% else %>
+                      <li><a href="/users/sign_up">サインアップ</a></li>
+                    <% end %>
+                    <% if current_user %>
+                      <li><%= link_to "サインアウト", destroy_user_session_path, method: :delete %></li>
+                    <% end %>
+                    <li><%= link_to "新規投稿", new_post_path ,"data-turbolinks": false%></li>
+                    <% if current_user %>
+                      <% if unchecked_notifications.any? %>
+                          <li>
+                              <%= link_to "通知", notifications_path %>
+                          </li>
+                          <i class="fa fa-circle" style="color: gold;"></i>
+                      <% else %>
+                          <li>
+                              <%= link_to "通知", notifications_path %>
+                          </li>
+                      <% end %>
+                    <% end %>
+                    <li><a href="#">Service</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+      
+              </nav>
+            </div>
+          </div>
+          <div class="banner-content row clearfix">
+            <div class="container">
+              <div class="col-38">
+                <br>
+                <br>
+                <br>
+                <div class="section-heading">
+                    <br>
+                      <h1>INNOVATIVE TRADING SYSTEM OF 3D MODEL</h1>
+                    </br>
+                    <br>
+                      <h2 class="effect-fade ff">あなたの応援がクリエイターの力となって作品を生み出すという事をあなた自身が実感できる体験</h2>
+                    </br>
+                </div>
+    
+                 
+                <a href="/posts/new" class="button effect-fade">START CREATING TODAY</a>
+                  
+              </div>
+              
+            </div>
+          </div>
+          
+        
+        </header>
+        <header  class="bg-wb scrollto clearfix" data-enllax-ratio=".5">
+          <div class="banner-content row clearfix">
+            <div class="container">
+              
+                <br>
+                <br>
+                <br>
+                <div class="section-heading text-center">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    <h2 class="text-center effect-fade ff"><strong>応援をより身近にしたい</strong></h2>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">「これからもクリエイターに作品を作り続けてほしい」</h4></br>
+                    <br><h4 class="text-center effect-fade ff">「自分の応援が作品を創出する力になってほしい」</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">「応援しているクリエイターの作品が欲しい」</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">そんな応援の気持ちをもっと形にして、楽しむことだけのために生み出されたのが「ジャワット」です。</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">単なる3Dモデルの販売サイトとは全く違う体験を味わえる、クリエイターとクライアント</h4></br>
+                    <br><h4 class="text-center effect-fade ff">一人ひとりに焦点を与えたシステム。それが「ジャワット」です。</h4></br>
+                    
+                    </h4>
+                </div>
+                
+                
+                
+                  
+              
+              
+            </div>
+          </div>
+          
+        
+        </header>
+        <header  class="bg-wb scrollto clearfix" data-enllax-ratio=".5">
+          <div class="banner-content row clearfix">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h2 class="text-center effect-fade ff">クリエイターにとってのメリット
+                    </h2>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4 class="text-center effect-fade ff"><strong>３Ｄモデルを作成する最高の環境を利用できる</strong></h4>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">ジャワットが考える最高の環境＝応援×楽しさ</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">この環境を実現できるようにこのシステムを制作しました。この環境を提供できるように</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">①依頼サイトとして3Dモデルをクライアントに届けられる</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">②コミュニティサイトとして、より手軽に作品を投稿できる</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">③応援を見える化することでより身近に感じられる</h4></br>
+                    
+                </div>
+                  
+              
+              
+            </div>
+          </div>
+          
+        
+        </header>
+        <header  class="bg-wb scrollto clearfix" data-enllax-ratio=".5">
+          <div class="banner-content row clearfix">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h2 class="text-center effect-fade ff">クライアントのメリット</h2>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4 class="text-center effect-fade ff"><strong> あなたの応援がクリエイターの作品創出につながっていることを実感できる</strong></h4>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">①誰でも手軽に楽しく応援できる</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">②自分の応援しているクリエイターに3Dモデルを依頼できる</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">③自分の応援が目立つ</h4>
+                    </br>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">依頼する際にチップの大きさを設定するのはクライアントであるあなた自身</h4>
+                    </br>
+                    <br><h4 class="text-center effect-fade ff">チップは「応援しているクリエイターに作品を依頼できる」というここでしか味わえない体験に対する価値の大きさです。</h4></br>
+                </div>
+              
+              
+            </div>
+          </div>
+          
+        
+        </header>
+        <header  class="bg-wb scrollto clearfix" data-enllax-ratio=".5">
+          <div class="banner-content row clearfix">
+            <div class="container">
+                <div class="section-heading text-center">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h2 class="text-center effect-fade ff">JAWATの特徴</h2>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4 class="text-center effect-fade ff"><strong>販売形式は依頼のみ</strong></h4>
+                    <br>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">通常の販売形式は一切行いません。クライアントの応援からスタートし、その応援が作品を生み出すことを重視します。
+                    </h4>
+                    </br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4 class="text-center effect-fade ff"><strong>依頼を受けるかはクリエイターに選択権がある</strong></h4>
+                    <br>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">クリエイターにあったペースで作品が生まれることを尊重します。
+                    </h4>
+                    </br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <h4 class="text-center effect-fade ff"><strong>依頼内容はクライアントの最初の内容のみで決定する</strong></h4>
+                    <br>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">クライアントはクリエイターの技術を信頼し、その信頼の気持ちが作品を生み出します。
+                    </h4>
+                    </br>
+                    <br>
+                    <br>
+                    <br><h4 class="text-center effect-fade ff">面倒な取引メッセージを最小限にし、クリエイターの技術を最大限に発揮できる環境を提供します。
+                    </h4>
+                    </br>
+                    
+                </div>
+                
+                
+                <a href="/posts/new" class="button">START CREATING TODAY</a>
+                  
+              
+              
+            </div>
+          </div>
+          
+        
+        </header>
+        <%= javascript_pack_tag 'effect' %>
+        <%= javascript_pack_tag 'navbar' %>
+        <%= javascript_pack_tag 'i1' %>
+        <%= javascript_pack_tag 'j1' %>
+        <%= javascript_pack_tag 'j2' %>
+        <%= javascript_pack_tag 'j3' %>
+        <%= javascript_pack_tag 'j4' %>
+      
+        <%= javascript_pack_tag 'j6' %>
+        <%= javascript_pack_tag 'l1' %>
+        <%= javascript_pack_tag 'p1' %>
+        <%= javascript_pack_tag 's1' %>
+        <%= javascript_pack_tag 'w1' %>
+        
+      </div>
+      <%# ========== partial/footerを追加する ========== %>
+      <%= render 'partial/footer' %>
+
+    </div>
+  </body>
+</html>
+
+      
+
+
+    
+
+

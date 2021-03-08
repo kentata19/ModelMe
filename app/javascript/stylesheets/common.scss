@@ -1,0 +1,258 @@
+.col-12{
+  padding-top: 20px;
+}
+
+//underline
+.under{
+  border-bottom: solid 3px #7bc3d1;
+}
+
+//user-show
+.bg-blue{
+  background-color: #7bc3d1;
+}
+.white{
+  color: #fff;
+  font-weight: bold;
+}
+.under-white{
+  border-bottom: solid 3px #fff;
+}
+.my-black{
+  color:rgb(110, 118, 125);
+  
+}
+
+//effect
+.effect-fade{
+  opacity: 0;
+  transform : translate(0, 45px);
+  transition : all 1500ms;
+}
+.effect-fade.effect-scroll{
+  opacity: 1;
+  transform : translate(0, 0);
+}
+
+//top back
+.bg-wb{
+  background: url("~grid.jpg") no-repeat center top;
+  background-size:cover;
+  background-color:rgba(255,255,255,0.7);
+  background-blend-mode:lighten;
+}
+.ff{
+  font-family: 'YuMincho';
+}
+
+//要素隠す
+
+/*全体*/
+.hidden_box {
+  
+  padding: 0;
+}
+
+/*ボタン装飾*/
+.hidden_box label {
+  padding: 5px;
+  font-weight: bold;
+  border: solid 2px black;
+  cursor :pointer;
+}
+
+/*ボタンホバー時*/
+.hidden_box label:hover {
+  background: #efefef;
+}
+
+/*チェックは見えなくする*/
+.hidden_box input {
+  display: none;
+}
+
+/*中身を非表示にしておく*/
+.hidden_box .hidden_show {
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.8s;
+}
+
+/*クリックで中身表示*/
+.hidden_box input:checked ~ .hidden_show {
+  padding: 10px 0;
+  height: auto;
+  opacity: 1;
+}
+
+
+//文字数制限
+@media screen and (min-width:960px){
+  .max-350px {
+    display: block;
+    width: 250px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .profile-icon{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+}
+@media screen and (min-width:600px) and (max-width:960px){
+  .max-350px {
+    display: block;
+    width: 250px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .max-500px {
+    display: block;
+    width: 500px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .profile-icon{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+}
+@media screen and (max-width:600px){
+  .max-350px {
+    display: block;
+    width: 350px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .max-500px {
+    display: block;
+    width: 300px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .row{
+    padding: 0px !important;
+  }
+  .mb-3{
+    margin-bottom: 0px !important;
+  }
+  .profile-icon{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+  }
+  
+  
+} 
+
+.col-md-5{
+  padding: 0px;
+}
+
+//gradation-border
+.sample {
+  border-image: linear-gradient(90deg, #ff1744 25%, #00e5ff 25%, #00e5ff 50%, #c6ff00 50%, #c6ff00 75%, #ffea00 75%) 1/0 0 4px;
+  border-style: solid;
+}
+
+.sample1 {
+  border-bottom: 1px solid rgb(192, 192, 192);
+}
+
+//list-group
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+
+//font
+.cf{
+  font-family: Neucha,cursive;
+  color: inherit;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+
+//image
+.mb-3 .row{
+  margin: 0px;
+}
+
+
+
+
+//グラフ
+.bg-graf {
+  height: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* 要素を縦に並べる */
+  justify-content: space-evenly; /* 要素を均等間隔に分散させる */
+}
+
+.item {
+  box-sizing: border-box;
+  background-color: #bbf117;
+  padding: 4px;
+  height: 28px;
+  
+}
+/* 項目のキャプションが折り返してしまわないように設定 */
+.item_label {
+  white-space: nowrap;
+}
+/* 各要素の長さ */
+
+
+
+p {
+  color: #EEEEEE;
+}
+.col-md-8 h7{
+ float: left;
+}
+.col-md-8 small{
+  float: left;
+}
+
+
+
+
+//background-post-show
+.bg-black{
+  background: #252525;
+}
+.bg-gray{
+  background: #444444;
+}
+
+p{
+  color: #252525;
+}
+.bg-blue{
+  background-color: rgb(224, 253, 253);
+}
+
+
+//color
+.white-color{
+  color: #fff;
+}
+.margin-top{
+  padding-top: 10px;
+}

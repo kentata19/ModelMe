@@ -1,0 +1,178 @@
+<div class="container"> 
+  
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row">
+      
+      <div class="col-md-5">
+      
+        
+        <section>
+            
+          <div class="carousel">
+              <% number = 1 %>
+              <% if @right.images.attached? %>
+                <% @right.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% else %>
+                <% @right.post.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% end %>
+              
+              <ul class="carousel__slides">
+                <% if @right.images.attached? %>
+                  <% @right.images.each do |img| %>
+                    <li class="carousel__slide">
+                        <figure>
+                          <div class="card border-blue">
+                            <%= image_tag img.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          </div>
+                        </figure>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <% @right.post.images.each do |img| %>
+                    <li class="carousel__slide">
+                        <figure>
+                          <div class="card border-blue">
+                            <%= image_tag img.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          </div>
+                        </figure>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul> 
+              
+              <ul class="carousel__thumbnails">
+                <div class="container"> 
+                  <div class="row">  
+                    <% i = 1 %>
+                    <% if @right.images.attached? %>
+                      <% @right.images.each do |photo| %>
+                        <li>
+                            <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1080, 1080]) %></label>
+                            
+                              
+                            
+                        </li>
+                        <% i += 1%>
+                      <% end %>
+                    <% else %>
+                      <% @right.post.images.each do |photo| %>
+                        <li>
+                            <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1080, 1080]) %></label>
+                            
+                              
+                            
+                        </li>
+                        <% i += 1%>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </ul>
+              
+          </div>
+            
+        </section>
+  
+      </div>
+      <div class="col-md-7 bg-black">
+        <div class="card-body">
+          <h5 class="card-title white"><i class="fas fa-yen-sign"></i>共感購入総額</h5>
+          
+          <% if @right.sympathies.first %>
+            <% array = @right.sympathies.pluck(:point) %>
+            <h4 class="card-text white"><%= array.sum %>ポイント</h4>
+          <% else %>
+            <h4 class="card-text white">0ポイント</h4>
+          <% end %>
+          
+
+          <% if @right.sympathies.first %>
+            <h4 class="white-color"><i class="fas fa-users"></i>サポーター　　　<%= @right.sympathies.length %></h4>
+          <% else %>
+            <h4 class="card-text white"><i class="fas fa-users"></i>サポーター　　　0人</h4>
+          <% end %>
+          <%= link_to user_path(@right.user),class: "black-color no-text-decoration" do %>
+            <h5 class="card-text white"><i class="far fa-user"></i><%= @right.user.name%></h5>
+          <% end %>
+          
+                      
+          <% if @right and @right.criterions.first %>
+            <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+            <br>
+              <h6><span class="white-color"><strong>達成率：<%= ar.round %>%</strong></span></h6>
+            </br>
+            <div class="bg-graf">
+              
+              <% if ar >= 100 %>
+                <div class="item item1" style="width: 100%;">
+                  <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                </div>
+              <% else %>
+                <div class="item item1" style="width: <%= ar.round%>%;">
+                  <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <br>
+              <h6><span class="white-color"><strong>達成率：0%</strong></span></h6>
+            </br>
+            <div class="bg-graf">
+              <div class="item item1" style="width: 0%;">
+                
+              </div>
+            </div>
+          <% end %>
+          <br>
+            <h4 class="card-text white"><small><br><%= @right.content%></br></small></h4>
+          </br>
+          
+            <% if current_user == @right.post.user && @right.zipfiles.first %>
+              <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を確認する</span></button>
+              <% end %>
+            <% elsif current_user == @right.post.user && ar >= 100 %>
+              <%= link_to new_zipfile_path(@right), class: "black-color no-text-decoration" do %>
+                <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を投稿する</span></button>
+              <% end %>
+            <% elsif current_user == @right.post.user && @right.definitions.first %>
+              <%= link_to new_zipfile_path(@right), class: "black-color no-text-decoration" do %>
+                <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を投稿する</span></button>
+              <% end %>
+            <% elsif current_user == @right.post.user && @right.criterions.first%>
+              <%= link_to new_criterion_path(@right), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">確定する</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @right.criterions.first.nil? %>
+              <%= link_to new_criterion_path(@right),class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">ノルマを設定する</span></button>
+                </br>
+              <% end %>
+            <% elsif @right.criterions.first %>
+              <%= link_to new_sympathy_path(@right),class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">共感購入する</span></button>
+                </br>
+              <% end %>
+            <% else %>
+              <br>
+                <button type="button" class="btn btn-warning text-center"><span class="white-color">現在クリエイターからの反応はありません</span></button>
+              </br>
+            <% end %>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

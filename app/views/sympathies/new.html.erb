@@ -1,0 +1,42 @@
+
+  
+<div class="container">
+  <div class="text-center  bg-mario">
+    <br>
+    <br>
+      <h2 class="text-center amatic">Sympathy Chip</h2>
+    </br>
+    <br>
+  </div>
+  
+    <div class="container">
+      <div class="form-group text-center">
+        <h6>依頼内容</h6>
+        
+        <h7><%= @right.content %></h7>
+      </div>
+    
+      <%= form_with model: @sympathy, local:true, class:"contact-form row" do |form| %>
+        <div class="col-12">
+          <%= form.number_field :point, class: "input-text js-input text-center", value: @right.point, readonly: true %>
+          <label class="label text-center" for="name">Point</label>
+        </div>
+        <%= form.hidden_field :post_id, :value => @right.post.id %>
+        <%= form.hidden_field :right_id, :value => @right.id %>
+        <div class="form-field col-12 align-center">
+          
+          <%= form.submit "Submit", class: "submit-btn" %>
+        </div>
+
+        
+
+        <hr>
+        
+        
+      <% end %>
+    </div>
+  
+</div>
+
+
+<%= javascript_pack_tag 'post' %>

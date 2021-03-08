@@ -1,0 +1,36 @@
+<% visiter = notification.visiter %>
+<% post = notification.post %>
+
+<br>
+  <div class="container">
+    <div class="row">
+      <div class="user-view clearfix ">
+        
+        <%= link_to user_path(notification.visiter), class: "black-color no-text-decoration" do %>
+                    
+                    
+                    
+          <% if visiter.profile_photo.attached? %>
+
+            <%= image_tag visiter.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+          <% else %>
+            <img src="/assets/avatar.png" class="post-profile-icon" />
+          <% end %>
+          
+        <% end %>
+        <br>
+        <%= notification_form(notification) %><span class="moderate-font"><%= " (#{time_ago_in_words(notification.created_at)} 前)" %></span>
+        <br>
+        <% if !@reply.nil? %>
+          <p class="moderate-font" style="color: #C0C0C0;"><%= @reply %></p>
+        <% end %>
+        <% if !@support.nil? %>
+          <p class="moderate-font" style="color: #C0C0C0;"><%= @support %></p>
+        <% end %>
+        <% if !@right.nil? %>
+          <p class="moderate-font" style="color: #C0C0C0;"><%= @right %></p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</br>

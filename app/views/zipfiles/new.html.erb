@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="text-center  bg-mario">
+    <br>
+    <br>
+      <h2 class="text-center amatic">Zipfile</h2>
+    </br>
+    <br>
+  </div>
+  
+    <div class="container">
+    
+      <%= form_with model: @zipfile, local:true, class:"contact-form row" do |form| %>
+        <div class="form-field col-12 align-center">
+          <%= form.file_field :file %><br>
+        </div>
+        <%= form.hidden_field :right_id, :value => @right.id %>
+        <div class="form-field col-12 align-center">
+          
+          <%= form.submit "Submit", class: "submit-btn" %>
+        </div>
+
+        
+
+        <hr>
+        
+        
+      <% end %>
+    </div>
+  
+</div>

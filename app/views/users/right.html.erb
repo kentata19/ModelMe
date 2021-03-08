@@ -1,0 +1,156 @@
+<div class="text-center  bg-mario">
+  
+  <br>
+  <h3 class="amatic"><%= @user.name%></h3>
+  </br>
+  <small class=><%= @user.info%></small>
+  <div class="text-center">
+    <br>
+    <% if @user.profile_photo.attached? %>
+
+      <%= image_tag @user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "round-img-show" %>
+    <% else %>
+      <img src="/assets/avatar.png" class="round-img-show" />
+    <% end %>
+  </div>
+  <% if current_user != @user %>
+    <%= render 'relationships/follow_button', user: @user %>
+  <% else %>
+    <br>
+      <%= link_to "プロフィール編集", edit_user_registration_path, "data-turbolinks": false, class: "button" %>
+    </br>
+  <% end %>
+</div>
+
+<br>
+<br>
+<div class-"container">
+  <div id = "row-padding">
+    <div class="row">
+      <div class="col-lg-3 col-12">
+        <p class="sample"></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= link_to "投稿した作品", user_path(@user),class: "black-color cf no-text-decoration" %></li>
+          <li class="list-group-item"><%= link_to "共感購入した作品", user_sympathy_path(@user),class: "black-color cf no-text-decoration" %></li>
+          <li class="list-group-item"><%= link_to "権利購入した作品", user_right_path(@user),class: "black-color cf no-text-decoration" %></li>
+          <li class="list-group-item"><%= link_to "注文依頼一覧", user_wish_path(@user),class: "black-color cf no-text-decoration"%></li>
+        </ul>
+      </div>
+      <div class="col-lg-9 col-12">
+        <div class="text-center">
+          
+          <br>
+          <div class="card-group">
+            <% @rights.each do |right| %>
+              
+              <% post = Post.find(right.post_id)%>
+                <br>
+                  <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        
+                          
+                        <% if right.images.attached? %>
+                          <%= link_to right_path(right) do %>
+                            
+                            <%= image_tag right.images.first.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to right_path(right) do %>
+                              
+                            <%= image_tag right.post.images.first.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          <% end %>
+                        <% end %>
+                        
+
+                      </div>
+                      <div class="col-md-8 bg-gray">
+                        <div class="card-body">
+                          <h6 class="max-500px white"><%= link_to right_path(right),class: "no-text-decoration white-color" do %><%= right.content %><% end %></h6>
+                          <br>
+                            <small><span class="white-color"><i class="fas fa-coins"></i>必要なポイント : <%= right.point %></span></small>
+                          </br>
+                          <br>
+                            <small>
+                              <%= link_to user_path(right.user),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                                <h6 class="white-color"><i class="far fa-user"></i><%= right.user.name %></h6>
+                              <% end %>
+                              
+                            </small>
+                          </br>
+                          
+                          <br>
+                            <small><span class="white-color"><i class="fas fa-users"></i>サポーター : <%= right.sympathies.length %></span></small>
+                          </br>
+                          <br>
+                          <% if right.criterions.first %>
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <div class="bg-graf">
+                              
+                                
+                                <% if ar >= 100 %>
+                                  <div class="item item1" style="width: 100%;">
+                                    <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                                  </div>
+                                <% else %>
+                                  <div class="item item1" style="width: <%= ar.round%>%;">
+                                    <span class="item_label white-color"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                                  </div>
+                                <% end %>
+                            </div>
+                          <% else %>
+                            <small><span class="white-color">現在共感は0です</span></small>
+                          <% end %>
+                          <br>
+                            
+                          <% if current_user == right.post.user && right.zipfiles.first %>
+                            <%= link_to zipfile_path(right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を確認する</span></button>
+                              </br>
+                            <% end %>
+                          <% elsif current_user == right.post.user && right.criterions.first%>
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <% if ar >= 100 || right.definitions.first%> 
+                              <%= link_to new_zipfile_path(right), class: "black-color no-text-decoration" do %>
+                                <br>
+                                  <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を投稿する</span></button>
+                                </br>
+                              <% end %>
+                            <% else %>  
+                              <%= link_to new_criterion_path(right), class: "black-color no-text-decoration" do %>
+                                <br>
+                                  <button type="button" class="btn btn-warning text-center"><span class="white-color">確定する</span></button>
+                                </br>
+                              <% end %>
+                            <% end %>
+                          <% elsif current_user == right.post.user && right.criterions.first.nil? %>
+                            <%= link_to new_criterion_path(right),class: "black-color no-text-decoration" do %>
+                              <button type="button" class="btn btn-warning"><span class="white-color">ノルマを設定する</span></button>
+                            <% end %>
+                          <% elsif right.criterions.first %>
+                            <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                              <button type="button" class="btn btn-warning"><span class="white-color">共感購入する</span></button>
+                            <% end %>
+                          <% else %>
+                            <strong class="white-color">クリエイターからの反応はありません</strong>
+                          <% end %>
+                          </br>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </br>
+            <% end %>
+          </div> 
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
+<%= javascript_pack_tag 'effect' %>

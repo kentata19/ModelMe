@@ -1,0 +1,57 @@
+<div class="container">
+  
+    <div class="text-center  bg-mario">
+      <br>
+      <br>
+        <h2 class="text-center amatic">Profile</h2>
+      </br>
+      <br>
+    </div>
+
+
+<br>
+  
+  
+    <br>
+    
+    <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), class:"contact-form row", local: true, method: :patch do |form| %>
+      <div class="col-12">
+        <%= form.text_field :name, id: "title", class: "input-text js-input text-center"  %>
+        <label class="label text-center" for="name">name</label>
+      </div>
+      <div class="col-12">
+        <%= form.email_field :email, id: "title", class: "input-text js-input text-center"  %>
+        <label class="label text-center" for="name">email</label>
+      </div>
+      <div class="form-field col-12">
+        <%= form.text_area :info, id: "info", class: "input-text js-input text-center"%>
+        <label class="label" for="message">info</label>
+      </div>
+
+      <div class="col-12">
+        <label class="label" for="message">Profile</label>
+      </div>
+      
+      
+      <div class="circle-avatar">
+        <img id="avatar_img_prev" src="/assets/avatar.png" class='hidden' />
+
+        
+        <%= form.file_field :profile_photo, id: 'post_img'  %>
+      </div>
+      
+      <div class="form-field col-12 align-center">
+        
+        <%= form.submit "Submit", class: "submit-btn" %>
+      </div>
+
+      
+
+      <hr>
+      
+      
+    <% end %>
+</div>
+
+
+<%= javascript_pack_tag 'edit' %>

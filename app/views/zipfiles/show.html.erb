@@ -1,0 +1,123 @@
+<div class="container"> 
+  
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row">
+      
+      <div class="col-md-5">
+      
+        
+        <section>
+            
+          <div class="carousel">
+              <% number = 1 %>
+              <% if @right.images.attached? %>
+                <% @right.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% else %>
+                <% @right.post.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% end %>
+              
+              <ul class="carousel__slides">
+                <% if @right.images.attached? %>
+                  <% @right.images.each do |img| %>
+                    <li class="carousel__slide">
+                        <figure>
+                          <div class="card border-blue">
+                            <%= image_tag img.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          </div>
+                        </figure>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <% @right.post.images.each do |img| %>
+                    <li class="carousel__slide">
+                        <figure>
+                          <div class="card border-blue">
+                            <%= image_tag img.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          </div>
+                        </figure>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul> 
+              
+              <ul class="carousel__thumbnails">
+                <div class="container"> 
+                  <div class="row">  
+                    <% i = 1 %>
+                    <% if @right.images.attached? %>
+                      <% @right.images.each do |photo| %>
+                        <li>
+                            <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1080, 1080]) %></label>
+                            
+                              
+                            
+                        </li>
+                        <% i += 1%>
+                      <% end %>
+                    <% else %>
+                      <% @right.post.images.each do |photo| %>
+                        <li>
+                            <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1080, 1080]) %></label>
+                            
+                              
+                            
+                        </li>
+                        <% i += 1%>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </ul>
+              
+          </div>
+            
+        </section>
+  
+      </div>
+      <div class="col-md-7 bg-black">
+        <div class="card-body">
+          <%= link_to user_path(@zipfile.user), class: "black-color no-text-decoration" do %>
+                      
+                      
+                      
+            <% if @zipfile.user.profile_photo.attached? %>
+
+              <%= image_tag @zipfile.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+            <% else %>
+              <img src="/assets/avatar.png" class="post-profile-icon" />
+            <% end %>
+            <span class="white-color"><strong><%= @zipfile.user.name%></strong></span>
+          <% end %>
+          <br>
+         
+          <br>
+          <h5><span class="white-color"><strong>依頼内容:</strong></span></h5>
+          <h5><span class="white-color"><strong><%= @right.content%></strong></span></h5>
+          <% if current_user == @zipfile.user %>
+            <br>
+
+              <td>
+                <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
+                  
+                  <button type="button" class="btn btn-success"><i class="fas fa-cloud-download-alt"></i>ダウンロード</button>
+                <% end %>
+              </td>
+            </br>
+          <% end %>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+
+
+

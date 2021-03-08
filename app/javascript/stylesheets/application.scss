@@ -1,0 +1,8 @@
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~bootstrap/scss/bootstrap';
+@import 'home';
+@import "common";
+@import "users/devise";
+@import "users/show";
+@import "post";

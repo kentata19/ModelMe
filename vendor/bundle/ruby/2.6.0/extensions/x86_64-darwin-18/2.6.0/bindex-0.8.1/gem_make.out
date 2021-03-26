@@ -1,0 +1,15 @@
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+/Users/kentata19/.rbenv/versions/2.6.6/bin/ruby -I /Users/kentata19/.rbenv/versions/2.6.6/lib/ruby/2.6.0 -r ./siteconf20210326-66680-4oy2gt.rb extconf.rb
+creating Makefile
+
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.bundle
+
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20210326-66680-1ha9io6/skiptrace/internal

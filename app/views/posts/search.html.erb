@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>jawat</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    
+      <%= render 'partial/navbar' %>
+      <% if flash[:notice] %>
+        <div class="alert alert-info">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <div class="top"> 
+        <div class="cover">
+          
+          <h1><span class="white-color">Discover what's out there.</span></h1>
+          
+          <%= text_field_tag :title,'', class: 'js-text_field', placeholder: 'タイトルを入力してください' %>
+          <%= link_to rights_search_path,class: "black-color no-text-decoration","data-turbolinks": false do %>
+            <button type="button" class="btn btn-danger">権利チップ検索ページに飛ぶ</button>
+          <% end %>
+          <table class="js-messages">
+            
+          </table>
+          <div id="madeby">
+            <span>
+              Photo by <a href="https://unsplash.com/@benblenner" target="_blank">Ben Blennerhassett</a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <%= render 'partial/footer' %>
+    
+    
+  </body>
+  <%= javascript_pack_tag 'search' %>
+</html>

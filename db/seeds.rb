@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+reasons = ["共感数", "ポイント合計", "内容"]
+reasons.each do |reason|
+  Reason.create(content: reason)
+end

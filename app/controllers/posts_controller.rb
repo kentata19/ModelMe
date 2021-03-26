@@ -21,14 +21,26 @@ class PostsController < ApplicationController
 
   end
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.all.order('created_at DESC').page(params[:page]).per(40)
   end
   def show
     @post = Post.find(params[:id])
-    @rights = @post.rights.order('created_at DESC')
+    @rights = @post.rights.order('created_at DESC').page(params[:page]).per(5)
     @replies = @post.replies.order('created_at DESC')
     @supports = @post.supports.order('created_at DESC')
   end
+  def search
+    render layout: false
+  end
+
+  def searches
+    @posts = Post.where('caption LIKE(?)', "%#{params[:title]}%")
+    respond_to do |format|
+      format.html { redirect_to :root }
+      # ↓検索結果のデータをレスポンスするコード
+      format.json { render json: @posts }
+    end
+  end 
   private
     def post_params
       params.require(:post).permit(:title, :caption,  images: []).merge(user_id: current_user.id)

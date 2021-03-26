@@ -42,6 +42,11 @@
           <div class="card-group">
             <% @sympathies.each do |sympathy| %>
               <% right = Right.find(sympathy.right_id)%>
+              <% if right.criterions.first %>
+                <% @hagetako =  right.criterions.first.created_at.strftime("%Y-%m-%d") %>
+                <% @hagetakohagetako = Date.parse(@hagetako) + right.deadline - Date.today %>
+                <% @hagetakohagetakohagetako = @hagetakohagetako.to_i %>
+              <% end %>
               <% post = Post.find(sympathy.post_id)%>
                 <br>
                   <div class="card mb-3" style="max-width: 540px;">
@@ -102,36 +107,113 @@
                             <small><span class="white-color">現在共感は0です</span></small>
                           <% end %>
                           <br>
-                            
-                          <% if current_user == right.post.user && right.zipfiles.first %>
+                          <% if right.rejections.first %>
+                            <br>
+                              <button type="button" class="btn btn-warning text-center"><span class="white-color">この依頼はキャンセルされました</span></button>
+                            </br>
+                          <% elsif current_user == right.post.user && right.zipfiles.first %>
                             <%= link_to zipfile_path(right.zipfiles.first), class: "black-color no-text-decoration" do %>
                               <br>
                                 <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を確認する</span></button>
                               </br>
                             <% end %>
-                          <% elsif current_user == right.post.user && right.criterions.first%>
-                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
-                            <% if ar >= 100 || right.definitions.first%> 
+                          <% elsif current_user == right.post.user && right.definitions.first %>
+                            
+                            <% @manzi = right.definitions.first.created_at.strftime("%Y-%m-%d") %>
+                            <% @manzimanzi = Date.parse(@manzi) + right.due - Date.today%>
+                            <% @manzimanzimanzi = @manzimanzi.to_i %> 
+              
+                            <% if @manzimanzimanzi >= 0%>
                               <%= link_to new_zipfile_path(right), class: "black-color no-text-decoration" do %>
                                 <br>
-                                  <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を投稿する</span></button>
+                                  <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を投稿する(納期まであと<%= @manzimanzimanzi%>日です)</span></button>
                                 </br>
                               <% end %>
-                            <% else %>  
-                              <%= link_to new_criterion_path(right), class: "black-color no-text-decoration" do %>
+                            <% else %>
+                              <%= link_to new_zipfile_path(right), class: "black-color no-text-decoration" do %>
                                 <br>
-                                  <button type="button" class="btn btn-warning text-center"><span class="white-color">確定する</span></button>
+                                  <button type="button" class="btn btn-warning text-center"><span class="white-color">納期をすぎています。至急作品を投稿してください</span></button>
                                 </br>
                               <% end %>
                             <% end %>
+                          <% elsif current_user == right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako >= 0 %>
+                            
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <%= link_to new_rejection_path(right), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">依頼をキャンセルする</span></button>
+                              </br>
+                            <% end %>
+                          <% elsif current_user == right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako == -1 %>
+              
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <%= link_to new_definition_path(right), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">最終決定の期限まであと3日</span></button>
+                              </br>
+                            <% end %>
+                          <% elsif current_user == right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako == -2 %>
+                            
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <%= link_to new_definition_path(right), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">最終決定の期限まであと2日</span></button>
+                              </br>
+                            <% end %>
+                          <% elsif current_user == right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako == -3 %>
+                            
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <%= link_to new_definition_path(right), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">最終決定の期限まであと1日</span></button>
+                              </br>
+                            <% end %>
+                          <% elsif current_user == right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako < -3 %>
+                            
+                            <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                            <%= link_to new_definition_path(right), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">早急に最終決定してください</span></button>
+                              </br>
+                            <% end %>
+                            
                           <% elsif current_user == right.post.user && right.criterions.first.nil? %>
                             <%= link_to new_criterion_path(right),class: "black-color no-text-decoration" do %>
                               <button type="button" class="btn btn-warning"><span class="white-color">ノルマを設定する</span></button>
                             <% end %>
-                          <% elsif right.criterions.first %>
-                            <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
-                              <button type="button" class="btn btn-warning"><span class="white-color">共感購入する</span></button>
+                          <% elsif current_user && right.sympathies.pluck(:user_id).include?(current_user.id) && right.zipfiles.first %>
+                            <%= link_to zipfile_path(right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">作品をダウンロードする</span></button>
+                              </br>
                             <% end %>
+                          <% elsif current_user && right.sympathies.pluck(:user_id).include?(current_user.id) && right.definitions.first %>
+                            <% @manzi1 = right.definitions.first.created_at.strftime("%Y-%m-%d") %>
+                            <% @manzimanzi1 = Date.parse(@manzi1) + right.due - Date.today%>
+                            <% @manzimanzimanzi1 = @manzimanzi1.to_i %>
+                            <% if @manzimanzimanzi1 >= 0%>
+                              
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">作品はあと<%= @manzimanzimanzi1%>日以内に投稿される予定です。<i class="far fa-grin-beam-sweat"></i></span></button>
+                              </br>
+                              
+                            <% else %>
+                              
+                              <br>
+                                <button type="button" class="btn btn-warning text-center"><span class="white-color">催促する</span></button>
+                              </br>
+                              
+                            <% end %>
+                          <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako >= 0 %>
+                            <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                              <button type="button" class="btn btn-warning"><span class="white-color">共感購入する(共感締め切りまであと<%= @hagetakohagetakohagetako %>日)</span></button>
+                            <% end %>
+                          <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
+                            
+                            <br>
+                              <button type="button" class="btn btn-warning text-center"><span class="white-color">共感は締め切られました</span></button>
+                            </br>
+                            
                           <% else %>
                             <strong class="white-color">クリエイターからの反応はありません</strong>
                           <% end %>

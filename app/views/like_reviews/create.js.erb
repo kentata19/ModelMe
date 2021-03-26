@@ -1,0 +1,2 @@
+$('#like-icon-post-<%= @review.id.to_s %>').
+  html('<%= link_to "いいねを取り消す", review_like_review_path(@review.id, @like_review), method: :DELETE, remote: true, class: "loved hide-text" %>');

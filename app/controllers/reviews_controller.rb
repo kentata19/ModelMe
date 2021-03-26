@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
 
   end
   def index
-    @reviews = Review.all.order('created_at DESC')
+    @reviews = Review.all.order('created_at DESC').page(params[:page]).per(40)
   end
   def show
     @review = Review.find(params[:id])

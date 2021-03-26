@@ -3,6 +3,11 @@ class SympathiesController < ApplicationController
   def new
     @sympathy = Sympathy.new
     @right = Right.find_by(id: params[:id])
+    if @right.criterions.first
+      @hagetako =  @right.criterions.first.created_at.strftime("%Y-%m-%d") 
+      @hagetakohagetako = Date.parse(@hagetako) + @right.deadline - Date.today
+      @hagetakohagetakohagetako = @hagetakohagetako.to_i
+    end
   end
   def create
     @sympathy = Sympathy.new(sympathy_params)

@@ -4,18 +4,23 @@ Rails.application.routes.draw do
     controllers: { registrations: 'registrations' } # ここの行を追加
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root 'posts#home'
+  root 'posts#index'
   #userに関するルーティング
   get '/users/:id', to: 'users#show', as: 'user'
   get '/users/:id/sympathy', to: 'users#sympathy', as: 'user_sympathy'
   get '/users/:id/right', to: 'users#right', as: 'user_right'
   get '/users/:id/wish', to: 'users#wish', as: 'user_wish'
   #postに関するルーティング
+  get '/posts/search' => 'posts#search'
+  get '/posts/searches' => 'posts#searches'
   resources :posts do
     resources :photos, only: %i(create)
     resources :likes, only: %i(create destroy)
   end
+  
   #rightに関するルーティング
+  get '/rights/search' => 'rights#search'
+  get '/rights/searches' => 'rights#searches'
   resources :rights, only: %i(show create destroy)
   get '/rights/new/:id' => 'rights#new', as: 'new_right'
   #supportsに関するルーティング
@@ -36,8 +41,19 @@ Rails.application.routes.draw do
   #definitionに関するルーティング
   resources :definitions, only: %i(create destroy)
   get '/definitions/new/:id' => 'definitions#new', as: 'new_definition'
+
+  #rejectionsに関するルーティング
+  resources :rejections, only: %i(create destroy)
+  get '/rejections/new/:id' => 'rejections#new', as: 'new_rejection'
+
   #reviewsに関するルーティング
-  resources :reviews, only: %i(show index create destroy)
+  resources :reviews, only: %i(show index create destroy) do
+    resources :like_reviews, only: %i(create destroy)
+  end
+  #reply_reviewに関するルーティング
+  resources :reply_reviews, only: %i(create destroy)
+  get '/reply_reviews/new/:id' => 'reply_reviews#new', as: 'new_reply_review'
+
   get '/reviews/new/:id' => 'reviews#new', as: 'new_review'
   #notificationに関するルーティング
   resources :notifications, only: [:index, :destroy]

@@ -1,5 +1,6 @@
 class RightsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
+  
   def new
     @right = Right.new
     @post = Post.find_by(id: params[:id])
@@ -33,9 +34,26 @@ class RightsController < ApplicationController
   end
   def show
     @right = Right.find(params[:id])
+    if @right.criterions.first
+      @hagetako =  @right.criterions.first.created_at.strftime("%Y-%m-%d") 
+      @hagetakohagetako = Date.parse(@hagetako) + @right.deadline - Date.today
+      @hagetakohagetakohagetako = @hagetakohagetako.to_i
+    end
   end
+  
+  def search
+    render layout: false
+  end
+  def searches
+    @rights = Right.where('content LIKE(?)', "%#{params[:title]}%")
+    respond_to do |format|
+      format.html { redirect_to :root }
+      # ↓検索結果のデータをレスポンスするコード
+      format.json { render json: @rights }
+    end
+  end 
   private
     def right_params
-      params.require(:right).permit(:content, :point, :owner, images: []).merge(user_id: current_user.id, post_id: params[:right][:post_id])
+      params.require(:right).permit(:content, :point, :deadline, :due, :owner, images: []).merge(user_id: current_user.id, post_id: params[:right][:post_id])
     end
 end

@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>jawat</title>
+    <title>ModelMe</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
+    <script src="https://js.pay.jp/" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
   </head>
 
   <body>
-    <div id="wrapper">
+    <div class="profile-wrap" id="wrapper">
       <%= render 'partial/navbar' %>
       <% if flash[:notice] %>
         <div class="alert alert-info">
@@ -24,9 +27,11 @@
         </div>
       <% end %>
       
-      <%= yield %>
-      <br>
-      <%= render 'partial/footer' %>
+        <%= yield %>
+      
+        <%= render 'partial/footer' %>
+        
+      
     </div>
     
   </body>

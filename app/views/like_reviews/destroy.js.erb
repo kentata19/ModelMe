@@ -1,0 +1,2 @@
+$('#like-icon-post-<%= @review.id.to_s %>').
+  html('<%= link_to "いいね", review_like_reviews_path(@review), method: :POST, remote: true, class: "love hide-text" %>');

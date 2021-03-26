@@ -1,3 +1,4 @@
+
 <div class="container">
     
     <div class="card-group">
@@ -7,8 +8,8 @@
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
           <div class="card" style="width: 17rem;">
             <div class="card-body">
-              <small class="max-350px">
-                <strong>
+              <strong class="max-350px">
+                
                   <%= link_to user_path(obj.user), class: "black-color no-text-decoration" do %>
                     
                     
@@ -21,9 +22,9 @@
                     <% end %>
                     <%= obj.user.name%>
                   <% end %>
-                </strong>
                 
-              </small>
+                
+              </strong>
               
             </div>
             <%= link_to post_path(obj) do %>
@@ -34,7 +35,7 @@
             
             <div class="card-body">
             
-                <%= link_to post_path(obj),class: "black-color no-text-decoration" do %><small class="card-text max-350px"><strong><%= obj.caption%></strong></small><% end %>
+                <%= link_to post_path(obj),class: "black-color no-text-decoration" do %><strong class="card-text max-350px"><%= obj.caption%></strong><% end %>
               <br>
               <div class="row parts">
 
@@ -193,7 +194,13 @@
       <% end %>
       
     </div>
+    
+    <div class="text-center">
+      <%= paginate @posts %>
+    </div>
+    
 </div>
 
 
 
+  

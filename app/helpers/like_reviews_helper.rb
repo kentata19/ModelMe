@@ -1,0 +1,2 @@
+module LikeReviewsHelper
+end

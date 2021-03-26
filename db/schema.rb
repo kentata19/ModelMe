@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_050427) do
+ActiveRecord::Schema.define(version: 2021_03_14_084315) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -50,6 +50,15 @@ ActiveRecord::Schema.define(version: 2021_03_08_050427) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["right_id"], name: "index_definitions_on_right_id"
     t.index ["user_id"], name: "index_definitions_on_user_id"
+  end
+
+  create_table "like_reviews", force: :cascade do |t|
+    t.integer "review_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_like_reviews_on_review_id"
+    t.index ["user_id"], name: "index_like_reviews_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -92,6 +101,21 @@ ActiveRecord::Schema.define(version: 2021_03_08_050427) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "reasons", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rejections", force: :cascade do |t|
+    t.integer "right_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["right_id"], name: "index_rejections_on_right_id"
+    t.index ["user_id"], name: "index_rejections_on_user_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "user_id"
     t.integer "follow_id"
@@ -111,6 +135,16 @@ ActiveRecord::Schema.define(version: 2021_03_08_050427) do
     t.text "caption"
     t.index ["post_id"], name: "index_replies_on_post_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "reply_reviews", force: :cascade do |t|
+    t.text "comment", null: false
+    t.integer "review_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_reply_reviews_on_review_id"
+    t.index ["user_id"], name: "index_reply_reviews_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -135,8 +169,20 @@ ActiveRecord::Schema.define(version: 2021_03_08_050427) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
     t.integer "owner"
+    t.integer "deadline"
+    t.integer "due"
+    t.integer "status", default: 0
     t.index ["post_id"], name: "index_rights_on_post_id"
     t.index ["user_id"], name: "index_rights_on_user_id"
+  end
+
+  create_table "rrs", force: :cascade do |t|
+    t.integer "rejection_id", null: false
+    t.integer "reason_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["reason_id"], name: "index_rrs_on_reason_id"
+    t.index ["rejection_id"], name: "index_rrs_on_rejection_id"
   end
 
   create_table "supports", force: :cascade do |t|
@@ -192,19 +238,27 @@ ActiveRecord::Schema.define(version: 2021_03_08_050427) do
   add_foreign_key "criterions", "users"
   add_foreign_key "definitions", "rights"
   add_foreign_key "definitions", "users"
+  add_foreign_key "like_reviews", "reviews"
+  add_foreign_key "like_reviews", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "photos", "posts"
   add_foreign_key "posts", "users"
+  add_foreign_key "rejections", "rights"
+  add_foreign_key "rejections", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "replies", "posts"
   add_foreign_key "replies", "users"
+  add_foreign_key "reply_reviews", "reviews"
+  add_foreign_key "reply_reviews", "users"
   add_foreign_key "reviews", "posts"
   add_foreign_key "reviews", "rights"
   add_foreign_key "reviews", "users"
   add_foreign_key "rights", "posts"
   add_foreign_key "rights", "users"
+  add_foreign_key "rrs", "reasons"
+  add_foreign_key "rrs", "rejections"
   add_foreign_key "supports", "posts"
   add_foreign_key "supports", "users"
   add_foreign_key "sympathies", "posts"

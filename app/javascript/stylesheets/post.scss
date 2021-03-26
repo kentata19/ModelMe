@@ -143,6 +143,12 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
+.square-avatar img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
@@ -604,4 +610,41 @@ body {
         height: 100%;
         object-fit: cover;
     }
+}
+
+
+
+
+
+
+.full .h1 {
+  margin: 0;
+  position: absolute;
+  top: calc(50% - 0.5em);
+  width: 100%;
+  text-align: center;
+  line-height: 1;
+  font-size: 8vw;
+  font-family: "Montserrat", sans-serif;
+  text-shadow: 10px 10px 0 #fff;
+}
+
+.full {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url("~grand-canyon.jpg")
+    center / cover;
+}
+
+
+
+section {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 5vw;
+  font-family: "Montserrat", sans-serif;
 }

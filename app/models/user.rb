@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_one_attached :profile_photo , dependent: :destroy
   #likeに関するアソシエーション
   has_many :likes, dependent: :destroy
-
+  has_many :like_reviews, dependent: :destroy
 
   #postテーブル
   has_many :posts, dependent: :destroy
@@ -32,6 +32,8 @@ class User < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :zipfiles, dependent: :destroy
   has_many :definitions, dependent: :destroy
+  has_many :rejections, dependent: :destroy
+  has_many :reply_reviews, dependent: :destroy
   #通知に関するメソッド
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy

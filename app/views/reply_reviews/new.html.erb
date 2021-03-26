@@ -1,0 +1,24 @@
+
+<div class="container">
+<h2 class="text-center">Reply</h2>
+
+
+  <%= form_with model: @reply_review, local:true, class:"contact-form row" do |form| %>
+    <div class="col-12">
+      <%= form.text_area :comment, id: "comment", class: "input-text js-input"  %>
+      <label class="label text-center" for="name">Reply</label>
+    </div>
+    <%= form.hidden_field :review_id, :value => @review.id %>
+    <div class="form-field col-12 align-center">
+      
+      <%= form.submit "Submit", class: "submit-btn" %>
+    </div>
+
+    
+
+    <hr>
+    
+    
+  <% end %>
+
+</div>

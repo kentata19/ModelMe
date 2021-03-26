@@ -10,23 +10,63 @@
     
     <br>
     <%= form_with model: @review, local:true, class:"contact-form row" do |form| %>
-      <div class="col-12">
+      <div class="form-field col-12">
         <%= form.text_field :caption, id: "caption", class: "input-text js-input"  %>
-        <label class="label text-center" for="name">感想</label>
+        <label class="label text-center" for="name">オモイを共有する</label>
       </div>
-
-      <div class="col-12">
-        <label class="label" for="message">Photo</label>
+      <div class="form-field col-12">
+        <label class="label" for="message">Photo(画像は最大6枚まで保存できます。必ず1マイは選択してください)</label>
       </div>
-      
-      <div class="col-12 circle-avatar">
-        
-        <%= image_tag 'no-image.png', id:"avatar_img_prev",class:"hidden" %>
-        <%= form.file_field :images, multiple: true, id: 'post_img' %>
-
+      <div class="col-lg-4 col-12 square-avatar">
+        <div class="text-center">
+          <%= image_tag 'no-image.png', id:"avatar_img_prev0",class:"hidden" %>
+        </div>
+        <br>
+          <%= form.file_field :images, multiple: true, id: 'post_img0' %>
+        </br>
       </div>
-      <%= form.hidden_field :post_id, :value => @post.id %>
-      <%= form.hidden_field :right_id, :value => @post.right.id %>
+      <div class="col-lg-4 col-12 square-avatar">
+        <div class="text-center">
+          <%= image_tag 'no-image.png', id:"avatar_img_prev1",class:"hidden" %>
+        </div>
+        <br>
+          <%= form.file_field :images, multiple: true, id: 'post_img1' %>
+        </br>
+      </div>
+      <div class="col-lg-4 col-12 square-avatar">
+        <div class="text-center">
+          <%= image_tag 'no-image.png', id:"avatar_img_prev2",class:"hidden" %>
+        </div>
+        <br>
+          <%= form.file_field :images, multiple: true, id: 'post_img2' %>
+        </br>
+      </div>
+      <div class="col-lg-4 col-12 square-avatar">
+        <div class="text-center">
+          <%= image_tag 'no-image.png', id:"avatar_img_prev3",class:"hidden" %>
+        </div>
+        <br>
+          <%= form.file_field :images, multiple: true, id: 'post_img3' %>
+        </br>
+      </div>
+      <div class="col-lg-4 col-12 square-avatar">
+        <div class="text-center">
+          <%= image_tag 'no-image.png', id:"avatar_img_prev4",class:"hidden" %>
+        </div>
+        <br>
+          <%= form.file_field :images, multiple: true, id: 'post_img4' %>
+        </br>
+      </div>
+      <div class="col-lg-4 col-12 square-avatar">
+        <div class="text-center">
+          <%= image_tag 'no-image.png', id:"avatar_img_prev5",class:"hidden" %>
+        </div>
+        <br>
+          <%= form.file_field :images, multiple: true, id: 'post_img5' %>
+        </br>
+      </div>
+      <%= form.hidden_field :post_id, :value => @right.post.id %>
+      <%= form.hidden_field :right_id, :value => @right.id %>
       <div class="form-field col-12 align-center">
         
         <%= form.submit "Submit", class: "submit-btn" %>

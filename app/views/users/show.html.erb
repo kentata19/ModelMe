@@ -1,11 +1,6 @@
 
   <div class="text-center bg-mario">
-    
-    <br>
-    <h3 class="amatic"><%= @user.name%></h3>
-    </br>
-    <small class=><%= @user.info%></small>
-    <div class="text-center">
+  <div class="text-center">
       <br>
       
                     
@@ -19,6 +14,11 @@
       <% end %>
       
     </div>
+    <br>
+    <h3 class="amatic"><%= @user.name%></h3>
+    </br>
+    <small class=><%= @user.info%></small>
+    
     <% if current_user != @user %>
       <%= render 'relationships/follow_button', user: @user %>
     <% else %>
@@ -36,9 +36,9 @@
     <div class="col-lg-2 col-12">
       <p class="sample"></p>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><%= link_to "投稿した作品", user_path(@user),class: "black-color cf no-text-decoration"%></li>
-        <li class="list-group-item"><%= link_to "共感購入した作品", user_sympathy_path(@user),class: "black-color cf no-text-decoration"%></li>
-        <li class="list-group-item"><%= link_to "権利購入した作品", user_right_path(@user),class: "black-color cf no-text-decoration"%></li>
+        <li class="list-group-item"><%= link_to "投稿作品", user_path(@user),class: "black-color cf no-text-decoration"%></li>
+        <li class="list-group-item"><%= link_to "共感購入作品", user_sympathy_path(@user),class: "black-color cf no-text-decoration"%></li>
+        <li class="list-group-item"><%= link_to "権利購入作品", user_right_path(@user),class: "black-color cf no-text-decoration"%></li>
         <li class="list-group-item"><%= link_to "注文依頼一覧", user_wish_path(@user),class: "black-color cf no-text-decoration"%></li>
       </ul>
     </div>

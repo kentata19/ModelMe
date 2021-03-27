@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_084315) do
+ActiveRecord::Schema.define(version: 2021_03_27_033433) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -133,7 +133,9 @@ ActiveRecord::Schema.define(version: 2021_03_14_084315) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "caption"
+    t.integer "right_id"
     t.index ["post_id"], name: "index_replies_on_post_id"
+    t.index ["right_id"], name: "index_replies_on_right_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
@@ -249,6 +251,7 @@ ActiveRecord::Schema.define(version: 2021_03_14_084315) do
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "replies", "posts"
+  add_foreign_key "replies", "rights"
   add_foreign_key "replies", "users"
   add_foreign_key "reply_reviews", "reviews"
   add_foreign_key "reply_reviews", "users"

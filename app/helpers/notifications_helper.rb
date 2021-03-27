@@ -11,7 +11,7 @@ module NotificationsHelper
     #notification.actionがfollowかlikeかcommentか
     case notification.action
       when "reply" then
-        @reply = Reply.find_by(id: @visiter_reply)&.caption
+        @reply = Rep.find_by(id: @visiter_reply)&.caption
         tag.a(@visiter.name, href:user_path(@visiter), style:"font-weight: bold;")+"が"+tag.a('あなたの投稿', href:post_path(notification.post_id), style:"font-weight: bold;")+"にコメントしました"
       when "right" then
         @right = Right.find_by(id: @visiter_right)&.content

@@ -107,9 +107,9 @@
                 <h5 class="card-text white amatic"><i class="far fa-heart"></i>  0</h5>
               </br>
             <% end %>
-            <% if @post.replies.first %>
+            <% if @post.reps.first %>
               <br>
-                <h5 class="card-text white margin amatic"><i class="far fa-comments"></i>  <%= @post.replies.length%></h5>
+                <h5 class="card-text white margin amatic"><i class="far fa-comments"></i>  <%= @post.reps.length%></h5>
               </br>
             <% else %>
               <br>

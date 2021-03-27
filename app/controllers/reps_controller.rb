@@ -1,7 +1,8 @@
-class RepliesController < ApplicationController
+class RepsController < ApplicationController
+  
   before_action :authenticate_user!, only: [:new, :create, :destroy]
   def new
-    @reply = Rep.new
+    @rep = Rep.new
     @post = Post.find_by(id: params[:id])
   end
   def create
@@ -32,6 +33,7 @@ class RepliesController < ApplicationController
   end
   private
     def reply_params
-      params.require(:rep).permit(:caption).merge(user_id: current_user.id, post_id: params[:reply][:post_id])
+      params.require(:rep).permit(:caption).merge(user_id: current_user.id, post_id: params[:rep][:post_id])
     end
+  
 end

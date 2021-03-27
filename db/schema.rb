@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_033433) do
+ActiveRecord::Schema.define(version: 2021_03_27_041634) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -126,19 +126,6 @@ ActiveRecord::Schema.define(version: 2021_03_27_033433) do
     t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
-  create_table "replies", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
-    t.integer "point"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "caption"
-    t.integer "right_id"
-    t.index ["post_id"], name: "index_replies_on_post_id"
-    t.index ["right_id"], name: "index_replies_on_right_id"
-    t.index ["user_id"], name: "index_replies_on_user_id"
-  end
-
   create_table "reply_reviews", force: :cascade do |t|
     t.text "comment", null: false
     t.integer "review_id", null: false
@@ -147,6 +134,16 @@ ActiveRecord::Schema.define(version: 2021_03_27_033433) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["review_id"], name: "index_reply_reviews_on_review_id"
     t.index ["user_id"], name: "index_reply_reviews_on_user_id"
+  end
+
+  create_table "reps", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.text "caption", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_reps_on_post_id"
+    t.index ["user_id"], name: "index_reps_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -250,11 +247,10 @@ ActiveRecord::Schema.define(version: 2021_03_27_033433) do
   add_foreign_key "rejections", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
-  add_foreign_key "replies", "posts"
-  add_foreign_key "replies", "rights"
-  add_foreign_key "replies", "users"
   add_foreign_key "reply_reviews", "reviews"
   add_foreign_key "reply_reviews", "users"
+  add_foreign_key "reps", "posts"
+  add_foreign_key "reps", "users"
   add_foreign_key "reviews", "posts"
   add_foreign_key "reviews", "rights"
   add_foreign_key "reviews", "users"

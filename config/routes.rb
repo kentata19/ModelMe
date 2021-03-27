@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :photos, only: %i(create)
     resources :likes, only: %i(create destroy)
+    
+    
   end
   
   #rightに関するルーティング
@@ -27,8 +29,8 @@ Rails.application.routes.draw do
   resources :supports, only: %i(create destroy)
   get '/supports/new/:id' => 'supports#new', as: 'new_support'
   #replyに関するルーティング
-  resources :replies, only: %i(create destroy)
-  get '/replies/new/:id' => 'replies#new', as: 'new_reply'
+  resources :reps, only: %i(create destroy)
+  get '/reps/new/:id' => 'reps#new', as: 'new_rep'
   #sympathyに関するルーティング
   resources :sympathies, only: %i(create destroy)
   get '/sympathies/new/:id' => 'sympathies#new', as: 'new_sympathy'

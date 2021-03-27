@@ -26,7 +26,7 @@ class User < ApplicationRecord
 
   has_many :rights, dependent: :destroy
   has_many :supports, dependent: :destroy
-  has_many :replies, dependent: :destroy
+  has_many :reps, dependent: :destroy
   has_many :sympathies, dependent: :destroy
   has_many :criterions, dependent: :destroy
   has_many :reviews, dependent: :destroy

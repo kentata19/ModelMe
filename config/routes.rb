@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     controllers: { registrations: 'registrations' } # ここの行を追加
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root 'posts#index'
+  root 'posts#home'
   #userに関するルーティング
   get '/users/:id', to: 'users#show', as: 'user'
   get '/users/:id/sympathy', to: 'users#sympathy', as: 'user_sympathy'

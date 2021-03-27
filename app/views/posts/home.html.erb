@@ -59,7 +59,10 @@
                     <% if current_user %>
                       <li><a href="/users/<%= current_user.id%>">プロフィール</a></li>
                     <% else %>
-                      <li><a href="/users/sign_up">サインアップ</a></li>
+                      <li>
+                        
+                        <%= link_to "サインアップ", new_user_registration_path ,"data-turbolinks": false%>
+                      </li>
                     <% end %>
                     <% if current_user %>
                       <li><%= link_to "サインアウト", destroy_user_session_path, method: :delete %></li>

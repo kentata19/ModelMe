@@ -59,7 +59,8 @@ gem 'carrierwave', '~> 2.0'
 gem "mini_magick"
 gem "aws-sdk-s3", require: false
 gem 'pry-rails'
-gem 'payjp'
+
+gem 'stripe'
 gem 'kaminari'
 group :production do
   gem 'pg'

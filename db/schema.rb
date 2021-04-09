@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_27_041634) do
+ActiveRecord::Schema.define(version: 2021_04_08_090824) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -99,6 +99,32 @@ ActiveRecord::Schema.define(version: 2021_03_27_041634) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "ps", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.integer "support_id", null: false
+    t.integer "point"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "owner"
+    t.index ["post_id"], name: "index_ps_on_post_id"
+    t.index ["support_id"], name: "index_ps_on_support_id"
+    t.index ["user_id"], name: "index_ps_on_user_id"
+  end
+
+  create_table "pzs", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "right_id", null: false
+    t.integer "zipfile_id", null: false
+    t.integer "point"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "owner"
+    t.index ["right_id"], name: "index_pzs_on_right_id"
+    t.index ["user_id"], name: "index_pzs_on_user_id"
+    t.index ["zipfile_id"], name: "index_pzs_on_zipfile_id"
   end
 
   create_table "reasons", force: :cascade do |t|
@@ -243,6 +269,12 @@ ActiveRecord::Schema.define(version: 2021_03_27_041634) do
   add_foreign_key "likes", "users"
   add_foreign_key "photos", "posts"
   add_foreign_key "posts", "users"
+  add_foreign_key "ps", "posts"
+  add_foreign_key "ps", "supports"
+  add_foreign_key "ps", "users"
+  add_foreign_key "pzs", "rights"
+  add_foreign_key "pzs", "users"
+  add_foreign_key "pzs", "zipfiles"
   add_foreign_key "rejections", "rights"
   add_foreign_key "rejections", "users"
   add_foreign_key "relationships", "users"

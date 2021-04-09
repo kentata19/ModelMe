@@ -104,20 +104,73 @@
             <h6><span class="white-color"><strong>依頼内容:</strong></span></h6>
             <h5><span class="white-color"><strong><%= @right.content%></strong></span></h5>
           </br>
-          <% if current_user%>
-            <% if current_user == @zipfile.user || @right.sympathies.pluck(:user_id).include?(current_user.id)%>
-              <br>
 
-                <td>
-                  <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
-                    
-                    <h4><strong><span class="link-color"><i class="fas fa-cloud-download-alt"></i>zipfileダウンロード</span></strong></h4>
+          <% if current_user%>
+            <% if current_user == @zipfile.user %>
+                <br>
+
+                  <td>
+                    <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
+                      
+                      <h4><strong><span class="link-color"><i class="fas fa-cloud-download-alt"></i>zipfileダウンロード</span></strong></h4>
+                    <% end %>
+                  </td>
+                </br>
+            <% elsif @right.sympathies.pluck(:user_id).include?(current_user.id) %>
+              <% if Pz.where(user_id: current_user.id, zipfile_id: @zipfile.id).empty?%>
+                
+                  <%= form_tag zip_charge_path(@zipfile) do %>
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                      data-amount="<%= @right.point %>"
+                      data-currency="jpy"
+                      data-description="クレジット決済"
+                      data-name="権利購入"
+                      data-email=<%= "#{current_user.email}" %>
+                      data-label="購入してダウンロードする"
+                      data-image="/assets/credit.png"
+                      
+                      
+                      data-locale="auto"
+                      data-allow-remember-me="false">
+                    </script>
                   <% end %>
-                </td>
-              </br>
+                
+              <% else %>
+                <br>
+
+                  <td>
+                    <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
+                      
+                      <h4><strong><span class="link-color"><i class="fas fa-cloud-download-alt"></i>zipfileダウンロード</span></strong></h4>
+                    <% end %>
+                  </td>
+                </br>
+              <% end %>
             <% else %>
 
             <% end %>
+          <% end %>
+          <br>
+          <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>共感購入総額</span></strong></h6>
+          <div class="text-center">
+            <% if @zipfile.pzs.first %>
+              <% array = @zipfile.pzs.pluck(:point) %>
+              <h3 class="card-text white amatic"><%= array.sum %>ポイント</h3>
+            <% else %>
+              <h3 class="card-text white amatic">0ポイント</h3>
+            <% end %>
+          </div>
+          <% if @zipfile.pzs.first %>
+            <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h3 class="card-text white amatic"><%= @zipfile.pzs.length %></h3>
+            </div>
+          <% else %>
+            <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h3 class="card-text white amatic">0人</h3>
+            </div>
           <% end %>
           
 

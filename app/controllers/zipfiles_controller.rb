@@ -1,5 +1,5 @@
 class ZipfilesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :credit]
   def new
     @zipfile = Zipfile.new
     @right = Right.find(params[:id])
@@ -16,6 +16,11 @@ class ZipfilesController < ApplicationController
       flash[:alert] = "投稿に失敗しました"
     end
   end
+  def credit
+    @zipfile = Zipfile.find(params[:id])
+    @post = @zipfile.right.post
+    @right = @zipfile.right
+  end 
   def show
     @zipfile = Zipfile.find(params[:id])
     @right = @zipfile.right

@@ -1,0 +1,109 @@
+<div class="text-center  bg-mario">
+  <div class="text-center">
+    <br>
+    <% if @user.profile_photo.attached? %>
+
+      <%= image_tag @user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "round-img-show" %>
+    <% else %>
+      <img src="/assets/avatar.png" class="round-img-show" />
+    <% end %>
+  </div>
+  <br>
+  <h4 class="amatic"><strong><%= @user.name%></strong></h4>
+  <% psum = P.where(owner: @user.id).pluck(:point).sum %>
+  <% pzsum = Pz.where(owner:@user.id).pluck(:point).sum%>
+  <h4><strong>獲得ポイント： <%= psum + pzsum%>pt</strong></h4>
+  <small><strong><%= @user.info%></strong></small>
+  
+  <% if current_user != @user %>
+    <%= render 'relationships/follow_button', user: @user %>
+  <% else %>
+    <br>
+      <%= link_to "プロフィール編集", edit_user_registration_path, "data-turbolinks": false, class: "button" %>
+    </br>
+  <% end %>
+</div>
+
+<br>
+<br>
+<% if @user.ps.first.nil? %>
+  <div class="text-center">
+    <strong>まだ投稿はありません</strong>
+  </div>
+<% end %>
+<div class-"container">
+  <div id = "row-padding">
+    <div class="row">
+      <div class="col-lg-3 col-12">
+        <p class="sample"></p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><%= link_to "投稿した作品", user_path(@user),class: "black-color cf no-text-decoration" %></li>
+          <li class="list-group-item"><%= link_to "共感購入した作品", user_sympathy_path(@user),class: "black-color cf no-text-decoration" %></li>
+          <li class="list-group-item"><%= link_to "権利購入した作品", user_right_path(@user),class: "black-color cf no-text-decoration" %></li>
+          <li class="list-group-item"><%= link_to "注文依頼一覧", user_wish_path(@user),class: "black-color cf no-text-decoration"%></li>
+          <li class="list-group-item"><%= link_to "応援購入", user_support_path(@user),class: "black-color cf no-text-decoration"%></li>
+        </ul>
+      </div>
+      <div class="col-lg-9 col-12">
+        <div class="text-center">
+          
+          <br>
+          <div class="card-group">
+            <% @user.ps.each do |p| %>
+              <% support = Support.find(p.support_id) %>
+              <% post = Post.find(p.post_id) %>
+                <br>
+                  <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        
+                          
+                        
+                        
+                        <% if post.images.attached? %>
+                          <%= link_to post_path(support.post) do %>
+                            
+                            <%= image_tag support.post.images.first.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                          <% end %>
+                        <% end %>
+                      </div>
+                      <div class="col-md-8 bg-gray">
+                        <div class="card-body">
+                          <h6 class="max-500px white"><%= link_to post_path(post),class: "no-text-decoration white-color" do %><%= support.message %><% end %></h6>
+                          <br>
+                            <small><span class="white-color"><i class="fas fa-coins"></i>ポイント : <%= support.point %></span></small>
+                          </br>
+                          <br>
+                            <small>
+                              <%= link_to user_path(post.user),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                                <h6 class="white-color"><i class="far fa-user"></i><%= post.user.name %></h6>
+                              <% end %>
+                              
+                            </small>
+                          </br>
+                          
+                          
+                        
+
+
+
+                          
+                          
+                          </br>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </br>
+            <% end %>
+          </div> 
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+

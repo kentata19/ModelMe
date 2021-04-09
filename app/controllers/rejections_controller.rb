@@ -8,7 +8,7 @@ class RejectionsController < ApplicationController
       @hagetakohagetako = Date.parse(@hagetako) + @right.deadline - Date.today
       @hagetakohagetakohagetako = @hagetakohagetako.to_i
     end
-  end
+  end 
   def create
     @rejection = Rejection.new(rejection_params)
     @rejection.save!

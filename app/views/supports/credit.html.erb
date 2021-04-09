@@ -1,0 +1,123 @@
+<% if P.where(user_id: current_user.id, support_id: @support.id).empty? %>
+  <br>
+    <div class="text-center"> 
+      <%= form_tag charge_path(@support) do %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-amount="<%= @support.point %>"
+          data-currency="jpy"
+          data-description="クレジット決済"
+          data-name="応援購入"
+          data-email=<%= "#{current_user.email}" %>
+          data-label="購入する"
+          data-image="/assets/credit.png"
+          
+          
+          data-locale="auto"
+          data-allow-remember-me="false">
+        </script>
+      <% end %>
+    </div>
+  </br>
+<% else %>
+  <br>
+    <h7 class="text-center">お支払いは完了済みです。</h7>
+  </br>
+<% end %>
+
+<div class="container"> 
+  
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row">
+      
+      <div class="col-md-7">
+      
+        
+        <section>
+            
+          <div class="carousel">
+              <% number = 1 %>
+              <% if @post.images.attached? %>
+                <% @post.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% else %>
+                <% @post.post.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% end %>
+              
+              <ul class="carousel__slides">
+                
+                <% @post.images.each do |img| %>
+                  <li class="carousel__slide">
+                      <figure>
+                        <div class="card border-blue">
+                          <%= image_tag img.variant(resize_to_fill: [1580, 1080]), class: "card-img-top" %>
+                        </div>
+                      </figure>
+                  </li>
+                <% end %>
+      
+              </ul> 
+              
+              
+              
+          </div>
+            
+        </section>
+  
+      </div>
+      <div class="col-md-5 bg-black">
+        <div class="card-body">
+          <%= link_to user_path(@post.user), class: "black-color no-text-decoration" do %>
+                      
+                          
+                          
+            <% if @post.user.profile_photo.attached? %>
+
+              <%= image_tag @post.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+            <% else %>
+              <img src="/assets/avatar.png" class="post-profile-icon" />
+            <% end %>
+            <strong><span class="white-color"><%= @post.user.name%></span></strong>
+
+
+              
+            
+          <% end %>
+          <h6 class="card-text white"><%= @post.caption %></h6>
+          <br>
+          <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>応援購入総額</span></strong></h6>
+          <div class="text-center">
+            <% if @post.ps.first %>
+              <% array = @post.ps.pluck(:point) %>
+              <h3 class="card-text white amatic"><%= array.sum %>ポイント</h3>
+            <% else %>
+              <h3 class="card-text white amatic">0ポイント</h3>
+            <% end %>
+          </div>
+
+
+          <% if @post.ps.first %>
+            <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h3 class="card-text white amatic"><%= @post.ps.length %>人</h3>
+            </div>
+          <% else %>
+            <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h3 class="card-text white amatic">0人</h3>
+            </div>
+          <% end %>
+          
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

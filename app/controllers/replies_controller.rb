@@ -1,11 +1,11 @@
 class RepliesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
   def new
-    @reply = Reply.new
+    @reply = Rep.new
     @post = Post.find_by(id: params[:id])
   end
   def create
-    @reply =  Reply.new(reply_params)
+    @reply =  Rep.new(reply_params)
     @reply_post = @reply.post
     @reply.save
     if @reply.save
@@ -21,7 +21,7 @@ class RepliesController < ApplicationController
 
   end
   def destroy
-    @reply = Reply.find_by(id: params[:id])
+    @reply = Rep.find_by(id: params[:id])
     @reply.destroy
     if @reply.destroy
       flash[:notice] = "投稿が削除されました"
@@ -32,6 +32,6 @@ class RepliesController < ApplicationController
   end
   private
     def reply_params
-      params.require(:reply).permit(:caption).merge(user_id: current_user.id, post_id: params[:reply][:post_id])
+      params.require(:rep).permit(:caption).merge(user_id: current_user.id, post_id: params[:reply][:post_id])
     end
 end

@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @rights = @post.rights.order('created_at DESC').page(params[:page]).per(5)
-    @replies = @post.replies.order('created_at DESC')
+    @replies = @post.reps.order('created_at DESC')
     @supports = @post.supports.order('created_at DESC')
   end
   def search

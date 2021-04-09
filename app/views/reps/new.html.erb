@@ -1,0 +1,26 @@
+<div class="container">
+  <h2 class="text-center">Reply</h2>
+  
+  
+    <%= form_with model: @rep, local:true, class:"contact-form row" do |form| %>
+      <div class="col-12">
+        <%= form.text_area :caption, id: "caption", class: "input-text js-input"  %>
+        <label class="label text-center" for="name">Reply</label>
+      </div>
+      <%= form.hidden_field :post_id, :value => @post.id %>
+      <div class="form-field col-12 align-center">
+        
+        <%= form.submit "Submit", class: "submit-btn" %>
+      </div>
+
+      
+
+      <hr>
+      
+      
+    <% end %>
+  
+</div>
+
+
+<%= javascript_pack_tag 'post' %>

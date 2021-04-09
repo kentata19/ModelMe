@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
@@ -59,7 +59,8 @@ gem 'carrierwave', '~> 2.0'
 gem "mini_magick"
 gem "aws-sdk-s3", require: false
 gem 'pry-rails'
-gem 'payjp'
+
+gem 'stripe'
 gem 'kaminari'
 group :production do
   gem 'pg'

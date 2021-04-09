@@ -33,13 +33,13 @@
         <%= form_with model: @criterion, local:true, class:"contact-form row" do |form| %>
           
           <div class="col-12">
-            <%= form.number_field :sp, class: "input-text js-input text-center" %>
+            <%= form.number_field :sp, class: "input-text js-input text-center", :required => true %>
             <label class="label text-center" for="name">依頼受託目安</label>
           </div>
           <%= form.hidden_field :right_id, :value => @right.id %>
           <div class="form-field col-12 align-center">
             
-            <%= form.submit "Submit", class: "submit-btn" %>
+            <%= form.submit "Submit", class: "submit-btn", :disabled => false%>
           </div>
 
           

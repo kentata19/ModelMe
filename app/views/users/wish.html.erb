@@ -1,9 +1,4 @@
 <div class="text-center  bg-mario">
-  
-  <br>
-  <h3 class="amatic"><%= @user.name%></h3>
-  </br>
-  <small class=><%= @user.info%></small>
   <div class="text-center">
     <br>
     <% if @user.profile_photo.attached? %>
@@ -13,6 +8,13 @@
       <img src="/assets/avatar.png" class="round-img-show" />
     <% end %>
   </div>
+  <br>
+  <h4 class="amatic"><strong><%= @user.name%></strong></h4>
+  <% psum = P.where(owner: @user.id).pluck(:point).sum %>
+  <% pzsum = Pz.where(owner:@user.id).pluck(:point).sum%>
+  <h4><strong>獲得ポイント： <%= psum + pzsum%>pt</strong></h4>
+  <small><strong><%= @user.info%></strong></small>
+  
   <% if current_user != @user %>
     <%= render 'relationships/follow_button', user: @user %>
   <% else %>
@@ -24,6 +26,11 @@
 
 <br>
 <br>
+<% if @rights.first.nil? %>
+  <div class="text-center">
+    <strong>まだ投稿はありません</strong>
+  </div>
+<% end %>
 <div class-"container">
   <div id = "row-padding">
     <div class="row">
@@ -34,6 +41,7 @@
           <li class="list-group-item"><%= link_to "共感購入した作品", user_sympathy_path(@user),class: "black-color cf no-text-decoration" %></li>
           <li class="list-group-item"><%= link_to "権利購入した作品", user_right_path(@user),class: "black-color cf no-text-decoration" %></li>
           <li class="list-group-item"><%= link_to "注文依頼一覧", user_wish_path(@user),class: "black-color cf no-text-decoration"%></li>
+          <li class="list-group-item"><%= link_to "応援購入", user_support_path(@user),class: "black-color cf no-text-decoration"%></li>
         </ul>
       </div>
       <div class="col-lg-9 col-12">

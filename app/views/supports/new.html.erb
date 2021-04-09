@@ -13,18 +13,19 @@
         <div class="col-12">
           <br>
           <br>
-          <%= form.text_area :message, id: "title", class: "input-text js-input"  %>
+          <%= form.text_area :message, id: "title", class: "input-text js-input", :required => true  %>
           <label class="label text-center" for="name">Message</label>
         </div>
 
         <div class="form-field col-12">
-          <%= form.number_field :point, id: "caption", class: "input-text js-input"%>
+          <%= form.number_field :point, id: "caption", class: "input-text js-input", :required => true%>
           <label class="label" for="message">Point</label>
         </div>
         <%= form.hidden_field :post_id, :value => @post.id %>
         <div class="form-field col-12 align-center">
           
-          <%= form.submit "Submit", class: "submit-btn" %>
+          <%= form.submit "Submit", class: "submit-btn", :disabled => false %>
+
         </div>
 
         
@@ -104,8 +105,8 @@
           <br>
           <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>応援購入総額</span></strong></h6>
           <div class="text-center">
-            <% if @post.supports.first %>
-              <% array = @post.supports.pluck(:point) %>
+            <% if @post.ps.first %>
+              <% array = @post.ps.pluck(:point) %>
               <h3 class="card-text white amatic"><%= array.sum %>ポイント</h3>
             <% else %>
               <h3 class="card-text white amatic">0ポイント</h3>
@@ -113,10 +114,10 @@
           </div>
 
 
-          <% if @post.supports.first %>
+          <% if @post.ps.first %>
             <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
             <div class="text-center">
-              <h3 class="card-text white amatic"><%= @post.supports.length %>人</h3>
+              <h3 class="card-text white amatic"><%= @post.ps.length %>人</h3>
             </div>
           <% else %>
             <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>

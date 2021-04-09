@@ -26,4 +26,8 @@ class UsersController < ApplicationController
     @rights = Right.where(owner: @user.id).order('created_at DESC')
     
   end
+  def support
+    @user = User.find_by(id: params[:id])
+    @supports = @user.supports.order('created_at DESC')
+  end
 end

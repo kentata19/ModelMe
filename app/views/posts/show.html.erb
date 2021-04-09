@@ -77,18 +77,18 @@
           <br>
           <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>応援購入総額</span></strong></h6>
           <div class="text-center">
-            <% if @post.supports.first %>
-              <% array = @post.supports.pluck(:point) %>
+            <% if @post.ps.first %>
+              <% array = @post.ps.pluck(:point) %>
               <h3 class="card-text white amatic"><%= array.sum %>ポイント</h3>
             <% else %>
               <h3 class="card-text white amatic">0ポイント</h3>
             <% end %>
           </div>
 
-          <% if @post.supports.first %>
+          <% if @post.ps.first %>
             <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
             <div class="text-center">
-              <h3 class="card-text white amatic"><%= @post.supports.length %></h3>
+              <h3 class="card-text white amatic"><%= @post.ps.length %></h3>
             </div>
           <% else %>
             <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>
@@ -107,9 +107,9 @@
                 <h5 class="card-text white amatic"><i class="far fa-heart"></i>  0</h5>
               </br>
             <% end %>
-            <% if @post.replies.first %>
+            <% if @post.reps.first %>
               <br>
-                <h5 class="card-text white margin amatic"><i class="far fa-comments"></i>  <%= @post.replies.length%></h5>
+                <h5 class="card-text white margin amatic"><i class="far fa-comments"></i>  <%= @post.reps.length%></h5>
               </br>
             <% else %>
               <br>
@@ -313,7 +313,7 @@
                   <% end %>
                 <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako >= 0 %>
                   <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
-                    <button type="button" class="btn btn-warning"><span class="white-color">共感購入する</span></button>
+                    <button type="button" class="btn btn-warning"><span class="white-color">共感購入する(共感締め切りまであと<%= @hagetakohagetakohagetako %>日)</span></button>
                   <% end %>
                 <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
                   
@@ -334,7 +334,9 @@
         </br>
       <% end %>
     <% else %>
-      <strong>権利購入はまだありません</strong>
+      <div class="container">
+        <h5 class="text-center"><strong>権利購入はまだありません</strong></h5>
+      </div>
     <% end %>
   </div>
   <div class="text-center">
@@ -347,7 +349,7 @@
 
 <div class="container">
   <br>
-  <h5 class="text-center">reply</h5>
+  <h5 class="text-center">リプライ</h5>
   
   <div class="card-group">
     <% if @replies.first %>
@@ -391,14 +393,76 @@
         
       <% end %>
     <% else %>
-      <div class="text-center">
-        <h5 class="text-center">replyはまだありません</h5>
+      <div class="container">
+        <h5 class="text-center"><strong>リプライはまだありません</strong></h5>
       </div>
+
+
+      <br>
+      <br>
+      <br>
     <% end %>
   </div>
-  <div class="text-center">
-    <%= paginate @rights %>
+  
+</div>
+<div class="container">
+  
+  <h5 class="text-center">応援購入</h5>
+  
+  <div class="card-group">
+    <% if @post.ps.first %>
+      <% @post.ps.each do |p| %>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+          <div class="card" style="width: 17rem;">
+            <div class="card-body">
+              <strong class="max-350px">
+                
+                  <%= link_to user_path(p.user), class: "black-color no-text-decoration" do %>
+                    
+                    
+                    
+                    <% if p.user.profile_photo.attached? %>
+        
+                      <%= image_tag p.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+                    <% else %>
+                      <img src="/assets/avatar.png" class="post-profile-icon" />
+                    <% end %>
+                    <%= p.user.name%>
+                  <% end %>
+                
+                
+              </strong>
+              
+            </div>
+            
+            <div class="card-body">
+              <strong><%= p.support.message %></strong>
+              <br><strong><span class="salmon"><%= p.point %>pt</span></strong></br>
+            </div>
+              
+              
+              
+          </div>
+            
+          
+            
+        </div>
+          
+        
+        
+      <% end %>
+    <% else %>
+      <div class="container">
+        <h5 class="text-center"><strong>応援購入はまだありません</strong></h5>
+      </div>
+
+
+      <br>
+      <br>
+      <br>
+    <% end %>
   </div>
+  
 </div>
 
 

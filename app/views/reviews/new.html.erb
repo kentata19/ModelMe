@@ -8,10 +8,10 @@
     </div>
 
     
-    <br>
+    <br> 
     <%= form_with model: @review, local:true, class:"contact-form row" do |form| %>
       <div class="form-field col-12">
-        <%= form.text_field :caption, id: "caption", class: "input-text js-input"  %>
+        <%= form.text_field :caption, id: "caption", class: "input-text js-input", :required => true  %>
         <label class="label text-center" for="name">オモイを共有する</label>
       </div>
       <div class="form-field col-12">
@@ -22,7 +22,7 @@
           <%= image_tag 'no-image.png', id:"avatar_img_prev0",class:"hidden" %>
         </div>
         <br>
-          <%= form.file_field :images, multiple: true, id: 'post_img0' %>
+          <%= form.file_field :images, multiple: true, id: 'post_img0', :required => true %>
         </br>
       </div>
       <div class="col-lg-4 col-12 square-avatar">
@@ -69,7 +69,7 @@
       <%= form.hidden_field :right_id, :value => @right.id %>
       <div class="form-field col-12 align-center">
         
-        <%= form.submit "Submit", class: "submit-btn" %>
+        <%= form.submit "Submit", class: "submit-btn", :disabled => false %>
       </div>
 
       

@@ -14,23 +14,23 @@
         <div class="col-12">
           <br>
           <br>
-          <%= form.text_area :content, id: "content", class: "text-center input-text js-input"  %>
+          <%= form.text_area :content, id: "content", class: "text-center input-text js-input", :required => true  %>
           <label class="label text-center" for="name">依頼内容(150字以内で)</label>
         </div>
         <div class="form-field col-12">
-          <%= form.number_field :point, id: "caption", class: "text-center input-text js-input"%>
+          <%= form.number_field :point, id: "caption", class: "text-center input-text js-input", :required => true%>
           <label class="label" for="message">Point</label>
         </div>
         <div class="form-field col-12">
-          <%= form.number_field :deadline, id: "deadline", class: "text-center input-text js-input", min: 1%>
+          <%= form.number_field :deadline, id: "deadline", class: "text-center input-text js-input", min: 1, :required => true%>
           <label class="label" for="message">共感可能日数(日)</label>
         </div>
         <div class="form-field col-12">
-          <%= form.number_field :due, id: "due", class: "text-center input-text js-input", min: 1%>
+          <%= form.number_field :due, id: "due", class: "text-center input-text js-input", min: 1, :required => true%>
           <label class="label" for="message">納期期間(日)</label>
         </div>
         <div class="form-field col-12">
-          <label class="label" for="message">Photo(画像は最大6枚まで保存できます。必ず一枚は選択してください。)</label>
+          <label class="label" for="message">Photo(画像は最大6枚まで保存できます。)</label>
         </div>
         
         
@@ -86,7 +86,7 @@
         <%= form.hidden_field :owner, :value => @post.user.id %>
         <div class="form-field col-12 align-center">
           
-          <%= form.submit "Submit", class: "submit-btn" %>
+          <%= form.submit "Submit", class: "submit-btn", :disabled => false %>
         </div>
 
         

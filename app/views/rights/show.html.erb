@@ -83,23 +83,23 @@
       <div class="col-md-5 bg-black">
         <div class="card-body">
           
-          <%= link_to user_path(@right.user), class: "black-color no-text-decoration" do %>
+          <%= link_to user_path(@right.post.user), class: "black-color no-text-decoration" do %>
                       
                           
                           
-            <% if @right.user.profile_photo.attached? %>
+            <% if @right.post.user.profile_photo.attached? %>
 
-              <%= image_tag @right.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+              <%= image_tag @right.post.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
             <% else %>
               <img src="/assets/avatar.png" class="post-profile-icon" />
             <% end %>
-            <strong><span class="white-color"><%= @right.user.name%></span></strong>
+            <strong><span class="white-color"><%= @right.post.user.name%></span></strong>
 
 
               
             
           <% end %>
-          <h6 class="card-text white"><%= @right.content%></h6>
+          <h6 class="card-text white">依頼 : <%= @right.content%></h6>
           <br>
           <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>共感購入総額</span></strong></h6>
           <div class="text-center">
@@ -161,7 +161,7 @@
             <% if @right.rejections.first %>
               <% reason = Reason.find(@right.rejections.first.rrs.first.reason_id)%>
               <br>
-                <button type="button" class="btn btn-warning text-center"><span class="white-color">この依頼はキャンセルされました(<%= reason.content %>)</span></button>
+                <button type="button" class="btn btn-secondary text-center"><span class="white-color">この依頼はキャンセルされました(<%= reason.content %>)</span></button>
               </br>
             <% elsif current_user == @right.post.user && @right.zipfiles.first %>
               <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>
@@ -261,7 +261,7 @@
             <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
               
               <br>
-                <button type="button" class="btn btn-warning text-center"><span class="white-color">共感は締め切られました</span></button>
+                <button type="button" class="btn btn-secondary text-center"><span class="white-color">共感は締め切られました</span></button>
               </br>
               
             <% else %>
@@ -278,7 +278,67 @@
   
 </div>
 
+<div class="container">
+  <br>
+  <h5 class="text-center">共感購入</h5>
+  
+  <div class="card-group">
+    <% if @sympathies.first %>
+      <% @sympathies.each do |sy| %>
+        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+          <div class="card" style="width: 17rem;">
+            <div class="card-body">
+              <strong class="max-350px">
+                
+                  <%= link_to user_path(sy.user), class: "black-color no-text-decoration" do %>
+                    
+                    
+                    
+                    <% if sy.user.profile_photo.attached? %>
+        
+                      <%= image_tag sy.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+                    <% else %>
+                      <img src="/assets/avatar.png" class="post-profile-icon" />
+                    <% end %>
+                    <%= sy.user.name%>
+                  <% end %>
+                
+                
+              </strong>
+              
+            </div>
+            
+            <div class="card-body">
+              <strong>共感合計回数 : <%= sy.user.sympathies.length %></strong>
+              <br>
+                <strong>ダウンロード合計回数 : <%= sy.user.pzs.length %></strong>
+              </br>
+            </div>
+              
+              
+              
+          </div>
+            
+          
+            
+        </div>
+          
+        
+        
+      <% end %>
+    <% else %>
+      <div class="container">
+        <h5 class="text-center"><strong>共感購入はまだありません</strong></h5>
+      </div>
 
+
+      <br>
+      <br>
+      <br>
+    <% end %>
+  </div>
+  
+</div>
 
 
 

@@ -7,7 +7,8 @@ class ZipfilesController < ApplicationController
   def create
     @zip = Zipfile.new(zipfile_params)
     @zip.save!
-    
+    @zip_post = @zip.right.post
+    @zip_post.create_notification_zipfile!(current_user, @zip.id)
     if @zip.save!
       redirect_to zipfile_path(@zip)
       flash[:notice] = "投稿が保存されました"
@@ -16,6 +17,7 @@ class ZipfilesController < ApplicationController
       flash[:alert] = "投稿に失敗しました"
     end
   end
+  
   def credit
     @zipfile = Zipfile.find(params[:id])
     @post = @zipfile.right.post

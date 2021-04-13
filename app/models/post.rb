@@ -83,4 +83,29 @@ class Post < ApplicationRecord
       end
       notification.save if notification.valid?
   end
+
+  #zipfileの通知に関するメソッド
+  def create_notification_zipfile!(current_user, zipfile_id)
+    
+    zipfile = Zipfile.find(zipfile_id)
+    sympathies = zipfile.right.sympathies
+    sympathies.each do |sympathy|
+      save_notification_zipfile!(current_user, zipfile_id, sympathy.user.id)
+    end
+  end
+
+  def save_notification_zipfile!(current_user, zipfile_id, visited_id)
+      # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
+      notification = current_user.active_notifications.new(
+        post_id: id,
+        zipfile_id: zipfile_id,
+        visited_id: visited_id,
+        action: 'zipfile'
+      )
+      # 自分の投稿に対するコメントの場合は、通知済みとする
+      if notification.visiter_id == notification.visited_id
+        notification.checked = true
+      end
+      notification.save if notification.valid?
+  end
 end

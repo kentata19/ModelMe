@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   #rightに関するルーティング
   get '/rights/search' => 'rights#search'
   get '/rights/searches' => 'rights#searches'
-  resources :rights, only: %i(show create destroy)
+  resources :rights, only: %i(show index create destroy)
   get '/rights/new/:id' => 'rights#new', as: 'new_right'
   #supportsに関するルーティング
   resources :supports, only: %i(create destroy)

@@ -217,7 +217,7 @@
               <div class="text-center"> 
                 <% if right.rejections.first %>
                   <br>
-                    <button type="button" class="btn btn-warning text-center"><span class="white-color">この依頼はキャンセルされました</span></button>
+                    <button type="button" class="btn btn-secondary text-center"><span class="white-color">この依頼はキャンセルされました</span></button>
                   </br>
                 <% elsif current_user == right.post.user && right.zipfiles.first %>
                   <%= link_to zipfile_path(right.zipfiles.first), class: "black-color no-text-decoration" do %>
@@ -318,7 +318,7 @@
                 <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
                   
                   <br>
-                    <button type="button" class="btn btn-warning text-center"><span class="white-color">共感は締め切られました</span></button>
+                    <button type="button" class="btn btn-secondary text-center"><span class="white-color">共感は締め切られました</span></button>
                   </br>
                   
                 <% else %>

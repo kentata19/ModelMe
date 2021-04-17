@@ -1,12 +1,12 @@
 
-<div class="container">
+
     
     <div class="card-group">
       <% @posts.each do |obj| %>
         <% max = obj.rights.pluck(:point).max %>
         <% right = obj.rights.find_by(point: max)%>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-          <div class="card" style="width: 17rem;">
+        <div class="col-xl-2 col-lg-4 col-md-6 col-12">
+          <div class="card" style="width: 14.5rem;">
             <div class="card-body">
               <strong class="max-350px">
                 
@@ -34,8 +34,9 @@
             <% end %>
             
             <div class="card-body">
-            
-                <%= link_to post_path(obj),class: "black-color no-text-decoration" do %><strong class="card-text max-350px"><%= obj.caption%></strong><% end %>
+              <h7>
+                <%= link_to post_path(obj),class: "black-color no-text-decoration" do %><small><strong class="card-text max-350px"><%= obj.caption%></strong></small><% end %>
+              </h7>
               <br>
               <div class="row parts">
 
@@ -83,11 +84,13 @@
                           <img src="/assets/avatar.png" class="post-index-profile-icon" />
                         <% end %>
                       <% end %>
-                      <%= link_to right_path(right),class: "black-color no-text-decoration" do %><%= right.content %><% end %>
+                      
+                        <%= link_to right_path(right),class: "black-color no-text-decoration" do %><%= right.content %><% end %>
+                      
                     </strong>
                   </small>
                 <% else %>
-                　<small><strong>現在の権利チップはありません</strong></small>
+                　<small><strong>権利チップはありません</strong></small>
                   <br>
                 <% end %>
               </h5>
@@ -199,7 +202,7 @@
       <%= paginate @posts %>
     </div>
     
-</div>
+
 
 
 

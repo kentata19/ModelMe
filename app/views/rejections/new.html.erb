@@ -3,12 +3,6 @@
   <br>
     <h2 class="text-center amatic">Request</h2>
   </br>
-  <br>
-  <br>
-  <br>
-    <h5 class="text-center amatic">理由を選択する</h5>
-  </br>
-  <br>
 </div>
 
 <% if @right.rejections.first %>
@@ -24,36 +18,7 @@
       
     <%= form_with model: @rejection, local:true, class:"contact-form row" do |form| %>
       <%= form.hidden_field :right_id, :value => @right.id %>
-      <div class="container">
-        <div class="card-group">
-          
-          
-          <% Reason.all.each do |genre_first_category| %>
-            <div class="col-md-4 col-4">
-            <br>
-            <br>
-              <div class="container">
-                
-                <div class="text-center">  
-                  <%= check_box "genre", genre_first_category.id, class:"checkbox" %>
-                  <script type="text/javascript">
-                    $(".checkbox").on("click", function(){
-                            $('.checkbox').prop('checked', false);  //  全部のチェックを外す
-                            $(this).prop('checked', true);  //  押したやつだけチェックつける
-                    });
-                  </script>
-                  <h7 class="margin-top"><%= genre_first_category.content %></h7>
-                </div>
-                
-              </div>
-            </br>
-            <br>  
-            </div>
-          <% end %>
-            
-          
-        </div>
-      </div>
+      
       <div class="form-field col-12 align-center">
         
         <%= form.submit "以下の依頼をキャンセルする", class: "submit-btn" %>
@@ -73,36 +38,7 @@
         
     <%= form_with model: @rejection, local:true, class:"contact-form row" do |form| %>
       <%= form.hidden_field :right_id, :value => @right.id %>
-      <div class="container">
-        <div class="card-group">
-          
-          
-          <% Reason.all.each do |genre_first_category| %>
-            <div class="col-md-4 col-4">
-            <br>
-            <br>
-              <div class="container">
-                
-                  <div class="text-center">  
-                    <%= check_box "genre", genre_first_category.id, class:"checkbox" %>
-                    <script type="text/javascript">
-                      $(".checkbox").on("click", function(){
-                              $('.checkbox').prop('checked', false);  //  全部のチェックを外す
-                              $(this).prop('checked', true);  //  押したやつだけチェックつける
-                      });
-                    </script>
-                    <h7 class="margin-top"><%= genre_first_category.content %></h7>
-                  </div>
-                
-              </div>
-            </br>
-            <br>  
-            </div>
-          <% end %>
-            
-          
-        </div>
-      </div>
+      
       <div class="form-field col-12 align-center">
         
         <%= form.submit "以下の依頼をキャンセルする", class: "submit-btn" %>
@@ -127,34 +63,7 @@
     <%= form_with model: @rejection, local:true, class:"contact-form row" do |form| %>
       <%= form.hidden_field :right_id, :value => @right.id %>
       <div class="container">
-        <div class="card-group">
-          
-          
-          <% Reason.all.each do |genre_first_category| %>
-            <div class="col-md-4 col-4">
-            <br>
-            <br>
-              <div class="container">
-                
-                  <div class="text-center">  
-                    <%= check_box "genre", genre_first_category.id, class:"checkbox" %>
-                    <script type="text/javascript">
-                      $(".checkbox").on("click", function(){
-                              $('.checkbox').prop('checked', false);  //  全部のチェックを外す
-                              $(this).prop('checked', true);  //  押したやつだけチェックつける
-                      });
-                    </script>
-                    <h7 class="margin-top"><%= genre_first_category.content %></h7>
-                  </div>
-                
-              </div>
-            </br>
-            <br>  
-            </div>
-          <% end %>
-            
-          
-        </div>
+        
       </div>
       <div class="form-field col-12 align-center">
         
@@ -179,34 +88,7 @@
     <%= form_with model: @rejection, local:true, class:"contact-form row" do |form| %>
       <%= form.hidden_field :right_id, :value => @right.id %>
       <div class="container">
-        <div class="card-group">
-          
-          
-          <% Reason.all.each do |genre_first_category| %>
-            <div class="col-md-4 col-4">
-            <br>
-            <br>
-              <div class="container">
-                
-                  <div class="text-center">  
-                    <%= check_box "genre", genre_first_category.id, class:"checkbox" %>
-                    <script type="text/javascript">
-                      $(".checkbox").on("click", function(){
-                              $('.checkbox').prop('checked', false);  //  全部のチェックを外す
-                              $(this).prop('checked', true);  //  押したやつだけチェックつける
-                      });
-                    </script>
-                    <h7 class="margin-top"><%= genre_first_category.content %></h7>
-                  </div>
-                
-              </div>
-            </br>
-            <br>  
-            </div>
-          <% end %>
-            
-          
-        </div>
+        
       </div>
       <div class="form-field col-12 align-center">
         
@@ -231,34 +113,7 @@
     <%= form_with model: @rejection, local:true, class:"contact-form row" do |form| %>
       <%= form.hidden_field :right_id, :value => @right.id %>
       <div class="container">
-        <div class="card-group">
-          
-          
-          <% Reason.all.each do |genre_first_category| %>
-            <div class="col-md-4 col-4">
-            <br>
-            <br>
-              <div class="container">
-                
-                  <div class="text-center">  
-                    <%= check_box "genre", genre_first_category.id, class:"checkbox" %>
-                    <script type="text/javascript">
-                      $(".checkbox").on("click", function(){
-                              $('.checkbox').prop('checked', false);  //  全部のチェックを外す
-                              $(this).prop('checked', true);  //  押したやつだけチェックつける
-                      });
-                    </script>
-                    <h7 class="margin-top"><%= genre_first_category.content %></h7>
-                  </div>
-                
-              </div>
-            </br>
-            <br>  
-            </div>
-          <% end %>
-            
-          
-        </div>
+        
       </div>
       <div class="form-field col-12 align-center">
         

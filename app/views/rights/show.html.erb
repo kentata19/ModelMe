@@ -160,9 +160,9 @@
 
 
             <% if @right.rejections.first %>
-              <% reason = Reason.find(@right.rejections.first.rrs.first.reason_id)%>
+              
               <br>
-                <button type="button" class="btn btn-secondary text-center"><span class="white-color">この依頼はキャンセルされました(<%= reason.content %>)</span></button>
+                <button type="button" class="btn btn-secondary text-center"><span class="white-color">この依頼はキャンセルされました</span></button>
               </br>
             <% elsif current_user == @right.post.user && @right.zipfiles.first %>
               <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>

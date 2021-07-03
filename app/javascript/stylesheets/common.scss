@@ -240,25 +240,7 @@
     padding-right: 0px;
   }
   //矢印
-  .arrow {
-    display:inline-block;
-    height:30px;
-    width:200px;
-    background-color:#fc8f36;
-    position:relative;
-    top:40px;
-  }
-
-  .arrow:before {
-    position:absolute;
-    content:"";
-    width:0;
-    height:0;
-    border:60px solid transparent;
-    border-left:60px solid #fc8f36;
-    left:200px;
-    top:-45px;
-  }
+  
 } 
 
 .col-md-5{

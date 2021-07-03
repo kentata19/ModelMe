@@ -70,5 +70,12 @@ Rails.application.routes.draw do
   post "zipfiles/:id/charge", to: "zip_charges#create", as: "zip_charge"
   resources :charges, only: [:new]
   resources :zip_charges, only: [:new]
+  
+  #決済に関するルーティング
+  get '/policies/tou' => 'policies#tou', as: 'tou_policy'
+  get '/policies/privacy' => 'policies#privacy', as: 'privacy_policy'
+  get '/policies/transaction' => 'policies#transaction', as: 'transaction_policy'
+  get '/policies/creator' => 'policies#creator', as: 'creator_policy'
+  get '/policies/client' => 'policies#client', as: 'client_policy'
 end
 

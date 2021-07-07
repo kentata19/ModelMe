@@ -1,10 +1,16 @@
 <div class="container">
-  <h2 class="text-center amatic">criterion<small>（ノルマ）</small></h2>
+  <br>
+  <h3 class="text-center amatic"><ノルマ></h3>
+  
   <div class="container">
     <div class="form-group text-center">
-      <h6>依頼内容</h6>
+      <h7>依頼内容</h7>
       
       <h4><%= @right.content %></h4>
+
+    </div>
+    <div class="text-center">
+      <h7><strong>※この依頼を受けると、他ユーザーが共感購入できるようになりますが、あくまで仮の決定です。実際に作品を提供するかどうかは共感の集まり具合など諸々の事情を考慮して、共感可能日数が経過した段階で最終決定をしてください。詳しくは、<a href="/policies/creator">クリエイターガイドライン</a>を確認ください。</strong></h7>
     </div>
     <br>
     <br>
@@ -17,13 +23,13 @@
       </div>
       <div class="col-4">
         <div class="text-center">
-          <h6>共感可能日数:</h6>
+          <h6>共感可能日数(他ユーザーが共感できる期間):</h6>
           <h3><%= @right.deadline %></h3>
         </div>
       </div>
       <div class="col-4">
         <div class="text-center">
-          <h6>納期猶予期間:</h6>
+          <h6>納期猶予期間(あなたが作品納期に費やせる時間):</h6>
           <h3><%= @right.due %></h3>
         </div>
       </div>
@@ -34,7 +40,7 @@
           
           <div class="col-12">
             <%= form.number_field :sp, class: "input-text js-input text-center", :required => true %>
-            <label class="label text-center" for="name">依頼受託目安</label>
+            <label class="label text-center" for="name">依頼受託目安(いくつ共感が集まれば作品を作るかという目安)</label>
           </div>
           <%= form.hidden_field :right_id, :value => @right.id %>
           <div class="form-field col-12 align-center">

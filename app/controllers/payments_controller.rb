@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :payment_cancel, :after_payment_register]
   def new
     @right = Right.find(params[:id])
     @zipfile = @right.zipfiles.first

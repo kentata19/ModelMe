@@ -158,6 +158,10 @@
                   </br>
                 <% end %>
             <% end %>
+          <% else %>
+            <%= link_to new_payment_url(@right.id),class: "black-color no-text-decoration","data-turbolinks": false do %>
+              <button type="button" class="btn btn-warning"><span class="white-color">購入画面に進む</span></button>
+            <% end %>
           <% end %>
           <br>
           <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>ダウンロード合計</span></strong></h6>

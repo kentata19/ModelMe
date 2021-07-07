@@ -26,11 +26,13 @@ class ZipfilesController < ApplicationController
   def show
     @zipfile = Zipfile.find(params[:id])
     @right = @zipfile.right
+    
   end
+  
 
   private
 
-      def zipfile_params
-          params.require(:zipfile).permit(:file).merge(user_id: current_user.id, right_id: params[:zipfile][:right_id])
-      end
+    def zipfile_params
+        params.require(:zipfile).permit(:file).merge(user_id: current_user.id, right_id: params[:zipfile][:right_id])
+    end
 end

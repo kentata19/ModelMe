@@ -36,6 +36,7 @@ class User < ApplicationRecord
   has_many :reply_reviews, dependent: :destroy
   has_many :pzs, dependent: :destroy
   has_many :ps, dependent: :destroy
+  has_many :csupports, dependent: :destroy
   #通知に関するメソッド
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy

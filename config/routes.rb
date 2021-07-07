@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   resources :criterions, only: %i(create destroy)
   get '/criterions/new/:id' => 'criterions#new', as: 'new_criterion'
   #zipfileに関するルーティング
+  get "zipfiles/payment_cancel" => "zipfiles#payment_cancel"
+  get "zipfiles/after_payment_register" => "zipfiles#after_payment_register"
   resources :zipfiles, only: %i(show create destroy)
   get '/zipfiles/new/:id' => 'zipfiles#new', as: 'new_zipfile'
   
@@ -66,16 +68,22 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   #決済に関するルーティング
   
-  post "supports/:id/charge", to: "charges#create", as: "charge"
-  post "zipfiles/:id/charge", to: "zip_charges#create", as: "zip_charge"
-  resources :charges, only: [:new]
-  resources :zip_charges, only: [:new]
   
-  #決済に関するルーティング
+  
+  
+  #ポリシーに関するルーティング
   get '/policies/tou' => 'policies#tou', as: 'tou_policy'
   get '/policies/privacy' => 'policies#privacy', as: 'privacy_policy'
   get '/policies/transaction' => 'policies#transaction', as: 'transaction_policy'
   get '/policies/creator' => 'policies#creator', as: 'creator_policy'
   get '/policies/client' => 'policies#client', as: 'client_policy'
+  
+  #決済に関するルーティング
+  get 'payments/new/:id' => 'payments#new', as: 'new_payment'
+  get 'payments/after_payment_register' => 'payments#after_payment_register'
+  get '/payments/payment_cancel' => 'payments#payment_cancel'
+  get 'spayments/new/:id' => 'spayments#new', as: 'new_spayment'
+  get 'spayments/after_payment_register' => 'spayments#after_payment_register'
+  get '/spayments/payment_cancel' => 'spayments#payment_cancel'
 end
 

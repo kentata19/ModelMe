@@ -1,6 +1,6 @@
 <div class="container">
   
-  <div class="card mb-3" style="max-width: 540px;">
+  <div class="card mb-3 button" style="max-width: 540px;">
     <div class="row">
       
       <div class="col-md-7">
@@ -138,7 +138,7 @@
 </div>
 <div class="container">
   <br>
-  <h5 class="text-center">権利チップ</h5>
+  <h5 class="text-center">制作依頼</h5>
   
   <div class="card-group">
     <% if @rights.first %>
@@ -150,7 +150,7 @@
         <% end %>
         <br>
           
-        <div class="card">
+        <div class="card button">
           
             <div class="container">
               <div class="profile-wrap">    
@@ -315,12 +315,15 @@
                   <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
                     <button type="button" class="btn btn-warning"><span class="white-color">共感購入する(共感締め切りまであと<%= @hagetakohagetakohagetako %>日)</span></button>
                   <% end %>
-                <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
+                <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 && right.zipfiles.first %>
                   
                   <br>
-                    <button type="button" class="btn btn-secondary text-center"><span class="white-color">共感は締め切られました</span></button>
+                  <%= link_to zipfile_path(right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                    <button type="button" class="btn btn-warning text-center"><span class="white-color">購入する</span></button>
+                  <% end %>
                   </br>
-                  
+                <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0%>
+                  共感は締め切られました
                 <% else %>
                   <strong>クリエイターからの反応はありません</strong>
                 <% end %>
@@ -355,7 +358,7 @@
     <% if @replies.first %>
       <% @replies.each do |reply| %>
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-          <div class="card" style="width: 17rem;">
+          <div class="card button" style="width: 17rem;">
             <div class="card-body">
               <strong class="max-350px">
                 
@@ -413,7 +416,7 @@
     <% if @post.ps.first %>
       <% @post.ps.each do |p| %>
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-          <div class="card" style="width: 17rem;">
+          <div class="card button" style="width: 17rem;">
             <div class="card-body">
               <strong class="max-350px">
                 
@@ -437,8 +440,13 @@
             
             <div class="card-body">
               <strong><%= p.support.message %></strong>
-              <br><strong><span class="salmon"><%= p.point %>pt</span></strong></br>
+              <br>
+              <div class="card-title">  
+                <h5><strong><i class="fas fa-coins"></i><%= p.support.point %></strong></h5>
+              </div>
+
             </div>
+            
               
               
               

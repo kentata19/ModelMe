@@ -21,6 +21,7 @@ class Post < ApplicationRecord
   has_many :sympathies, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :ps, dependent: :destroy
+  has_many :csupports, dependent: :destroy
   #通知に関するvalidation
   has_many :notifications, dependent: :destroy
   def create_notification_reply!(current_user, reply_id)

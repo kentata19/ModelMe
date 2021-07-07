@@ -2,8 +2,13 @@
     <div class="text-center  bg-mario">
       <br>
       <br>
-        <h2 class="text-center">新規投稿</h2>
+        <h3 class="text-center">新規投稿</h3>
       </br>
+      <br>
+      <div class="text-center">
+        <h7><strong>※新規投稿する際はクリエイターガイドラインをご確認ください。詳しくは、<a href="/policies/creator">こちら</a>をクリックしてください</strong></h7>
+      </div>
+      <br>
       <br>
     </div>
 
@@ -12,12 +17,12 @@
     <%= form_with model: @post, local:true, class:"contact-form row" do |form| %>
       <div class="form-field col-12">
         <%= form.text_field :title, id: "title", class: "text-center input-text js-input", :required => true  %>
-        <label class="label text-center" for="name">Title</label>
+        <label class="label text-center" for="name">タイトル</label>
       </div>
 
       <div class="form-field col-12">
         <%= form.text_area :caption, id: "caption", class: "text-center input-text js-input", :required => true%>
-        <label class="label" for="message">Caption</label>
+        <label class="label" for="message">キャプション</label>
       </div>
       
       <div class="form-field col-12">
@@ -25,7 +30,7 @@
       </div>
       
       
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev0",class:"hidden" %>
         </div>
@@ -33,7 +38,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img0', :required => true %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev1",class:"hidden" %>
         </div>
@@ -41,7 +46,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img1' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev2",class:"hidden" %>
         </div>
@@ -49,7 +54,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img2' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev3",class:"hidden" %>
         </div>
@@ -57,7 +62,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img3' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev4",class:"hidden" %>
         </div>
@@ -65,7 +70,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img4' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev5",class:"hidden" %>
         </div>

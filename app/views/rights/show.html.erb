@@ -259,12 +259,16 @@
               <%= link_to new_sympathy_path(@right),class: "black-color no-text-decoration","data-turbolinks": false do %>
                 <button type="button" class="btn btn-warning"><span class="white-color">共感購入する(共感締め切りまであと<%= @hagetakohagetakohagetako %>日)</span></button>
               <% end %>
-            <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
+            <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 && @right.zipfiles.first %>
               
               <br>
-                <button type="button" class="btn btn-secondary text-center"><span class="white-color">共感は締め切られました</span></button>
+              <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                <button type="button" class="btn btn-warning text-center"><span class="white-color">購入する</span></button>
+              <% end %>
               </br>
-              
+            
+            <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0  %>
+              <strong class="white-color">共感は締め切られました</strong>
             <% else %>
               <strong class="white-color">クリエイターからの反応はありません</strong>
             <% end %>
@@ -287,7 +291,7 @@
     <% if @sympathies.first %>
       <% @sympathies.each do |sy| %>
         <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-          <div class="card" style="width: 17rem;">
+          <div class="card button" style="width: 17rem;">
             <div class="card-body">
               <strong class="max-350px">
                 

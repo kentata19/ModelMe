@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_171252) do
+ActiveRecord::Schema.define(version: 2021_07_07_081150) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(version: 2021_04_16_171252) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["right_id"], name: "index_criterions_on_right_id"
     t.index ["user_id"], name: "index_criterions_on_user_id"
+  end
+
+  create_table "csupports", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.integer "support_id", null: false
+    t.integer "point"
+    t.integer "owner"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_csupports_on_post_id"
+    t.index ["support_id"], name: "index_csupports_on_support_id"
+    t.index ["user_id"], name: "index_csupports_on_user_id"
   end
 
   create_table "definitions", force: :cascade do |t|
@@ -263,6 +276,9 @@ ActiveRecord::Schema.define(version: 2021_04_16_171252) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "criterions", "rights"
   add_foreign_key "criterions", "users"
+  add_foreign_key "csupports", "posts"
+  add_foreign_key "csupports", "supports"
+  add_foreign_key "csupports", "users"
   add_foreign_key "definitions", "rights"
   add_foreign_key "definitions", "users"
   add_foreign_key "like_reviews", "reviews"

@@ -4,9 +4,12 @@
     <div class="text-center  bg-mario">
       <br>
       <br>
-        <h2 class="text-center amatic">Support Chip</h2>
+        <h3 class="text-center amatic">応援購入</h3>
       </br>
       <br>
+      <div class="text-center">
+        <h7><strong>※応援購入する際はクライントガイドラインをご確認ください。詳しくは、<a href="/policies/client">こちら</a>をクリックしてください</strong></h7>
+      </div>
     </div>
 
       <%= form_with model: @support, local:true, class:"contact-form row" do |form| %>
@@ -14,17 +17,17 @@
           <br>
           <br>
           <%= form.text_area :message, id: "title", class: "input-text js-input", :required => true  %>
-          <label class="label text-center" for="name">Message</label>
+          <label class="label text-center" for="name">応援メッセージ</label>
         </div>
 
         <div class="form-field col-12">
           <%= form.number_field :point, id: "caption", class: "input-text js-input", :required => true%>
-          <label class="label" for="message">Point</label>
+          <label class="label" for="message">応援金額</label>
         </div>
         <%= form.hidden_field :post_id, :value => @post.id %>
         <div class="form-field col-12 align-center">
           
-          <%= form.submit "Submit", class: "submit-btn", :disabled => false %>
+          <%= form.submit "決済ページへ進む", class: "submit-btn", :disabled => false %>
 
         </div>
 
@@ -105,8 +108,8 @@
           <br>
           <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>応援購入総額</span></strong></h6>
           <div class="text-center">
-            <% if @post.ps.first %>
-              <% array = @post.ps.pluck(:point) %>
+            <% if @post.csupports.first %>
+              <% array = @post.csupports.pluck(:point) %>
               <h3 class="card-text white amatic"><%= array.sum %>ポイント</h3>
             <% else %>
               <h3 class="card-text white amatic">0ポイント</h3>
@@ -114,10 +117,10 @@
           </div>
 
 
-          <% if @post.ps.first %>
+          <% if @post.csupports.first %>
             <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
             <div class="text-center">
-              <h3 class="card-text white amatic"><%= @post.ps.length %>人</h3>
+              <h3 class="card-text white amatic"><%= @post.csupports.length %>人</h3>
             </div>
           <% else %>
             <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>

@@ -106,6 +106,27 @@
               <br><h3><i class="fab fa-twitter"></i></h3><small><span class="white-color">twitterでシェア</span></small></br>
             <% end %>
           </br>
+          <br>
+          <strong class="white-color">
+            
+            
+            <%= link_to user_path(@review.post.user), class: "black-color no-text-decoration" do %>
+                    
+                        
+                        
+              <% if @review.post.user.profile_photo.attached? %>
+  
+                <%= image_tag @review.post.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+              <% else %>
+                <img src="/assets/avatar.png" class="post-profile-icon" />
+              <% end %>
+              <strong><span class="white-color">Creator: <%= @review.post.user.name%></span></strong>
+  
+  
+                
+              
+            <% end %>
+          </strong>
         </div>
       </div>
       

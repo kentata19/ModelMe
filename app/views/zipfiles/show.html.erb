@@ -112,29 +112,17 @@
                   <td>
                     <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
                       
-                      <h4><strong><span class="link-color"><i class="fas fa-cloud-download-alt"></i>zipfileダウンロード</span></strong></h4>
+                      
+                      <button type="button" class="btn btn-success text-center"><span>作品をダウンロードする</span></button>
                     <% end %>
                   </td>
                 </br>
             <% elsif @right.sympathies.pluck(:user_id).include?(current_user.id) %>
               <% if Pz.where(user_id: current_user.id, zipfile_id: @zipfile.id).empty?%>
                 
-                  <%= form_tag zip_charge_path(@zipfile) do %>
-                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                      data-amount="<%= @right.point %>"
-                      data-currency="jpy"
-                      data-description="クレジット決済"
-                      data-name="権利購入"
-                      data-email=<%= "#{current_user.email}" %>
-                      data-label="購入してダウンロードする"
-                      data-image="/assets/credit.png"
-                      
-                      
-                      data-locale="auto"
-                      data-allow-remember-me="false">
-                    </script>
-                  <% end %>
+                <%= link_to new_payment_url(@right.id),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                  <button type="button" class="btn btn-warning"><span class="white-color">購入画面に進む</span></button>
+                <% end %>
                 
               <% else %>
                 <br>
@@ -142,17 +130,41 @@
                   <td>
                     <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
                       
-                      <h4><strong><span class="link-color"><i class="fas fa-cloud-download-alt"></i>zipfileダウンロード</span></strong></h4>
+                      
+                      <button type="button" class="btn btn-success text-center"><span>作品をダウンロードする</span></button>
                     <% end %>
                   </td>
                 </br>
               <% end %>
             <% else %>
+                <% if Pz.where(user_id: current_user.id, zipfile_id: @zipfile.id).empty?%>
+                    
+                  <%= link_to new_payment_url(@right.id),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                    <button type="button" class="btn btn-warning"><span class="white-color">購入画面に進む</span></button>
+                  <% end %>
+                    
+                    <br>
+                    <br>
+                <% else %>
+                      <br>
 
+                        <td>
+                          <%= link_to rails_blob_path(@zipfile.file, disposition: "attachment") do %>
+                            
+                            
+                            <button type="button" class="btn btn-success text-center"><span>作品をダウンロードする</span></button>
+                          <% end %>
+                        </td>
+                  </br>
+                <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to new_payment_url(@right.id),class: "black-color no-text-decoration","data-turbolinks": false do %>
+              <button type="button" class="btn btn-warning"><span class="white-color">購入画面に進む</span></button>
             <% end %>
           <% end %>
           <br>
-          <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>共感購入総額</span></strong></h6>
+          <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>ダウンロード合計</span></strong></h6>
           <div class="text-center">
             <% if @zipfile.pzs.first %>
               <% array = @zipfile.pzs.pluck(:point) %>
@@ -202,7 +214,4 @@
   </div>
   
 </div>
-
-
-
 

@@ -1,205 +1,208 @@
 
-<div class="container">
+
     
-    <div class="card-group">
-      <% @posts.each do |obj| %>
-        <% max = obj.rights.pluck(:point).max %>
-        <% right = obj.rights.find_by(point: max)%>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
-          <div class="card" style="width: 17rem;">
-            <div class="card-body">
-              <strong class="max-350px">
+<div class="card-group">
+  <% @posts.each do |obj| %>
+    <% max = obj.rights.pluck(:point).max %>
+    <% right = obj.rights.find_by(point: max)%>
+    <div class="col-xl-2 col-lg-4 col-md-6 col-12">
+      <div class="card" style="width: 14.5rem;">
+        <div class="card-body">
+          <strong class="max-350px">
+            
+              <%= link_to user_path(obj.user), class: "black-color no-text-decoration" do %>
                 
-                  <%= link_to user_path(obj.user), class: "black-color no-text-decoration" do %>
-                    
-                    
-                    
-                    <% if obj.user.profile_photo.attached? %>
+                
+                
+                <% if obj.user.profile_photo.attached? %>
+    
+                  <%= image_tag obj.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+                <% else %>
+                  <img src="/assets/avatar.png" class="post-profile-icon" />
+                <% end %>
+                <%= obj.user.name%>
+              <% end %>
+            
+            
+          </strong>
+          
+        </div>
+        <%= link_to post_path(obj) do %>
+          <% if obj.images.attached? %>
+            <%= image_tag obj.images.first.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+          <% end %>
+        <% end %>
         
-                      <%= image_tag obj.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
-                    <% else %>
-                      <img src="/assets/avatar.png" class="post-profile-icon" />
-                    <% end %>
-                    <%= obj.user.name%>
-                  <% end %>
+        <div class="card-body">
+          <h7>
+            <%= link_to post_path(obj),class: "black-color no-text-decoration" do %><small><strong class="card-text max-350px"><%= obj.caption%></strong></small><% end %>
+          </h7>
+          <br>
+          <div class="row parts">
+
+            <%# ==========ここから編集する========== %>
+            <% if current_user %>
+              <div id="like-icon-post-<%= obj.id.to_s %>">
+                <% if obj.liked_by(current_user).present? %>
                 
-                
-              </strong>
-              
-            </div>
-            <%= link_to post_path(obj) do %>
-              <% if obj.images.attached? %>
-                <%= image_tag obj.images.first.variant(resize_to_fill: [1080, 1080]), class: "card-img-top" %>
+                  <%= link_to "いいねを取り消す", post_like_path(obj.id, obj.liked_by(current_user)), method: :DELETE, remote: true, class: "loved hide-text" %>
+                  
+                  
+                <% else %>
+                  <%= link_to "いいね", post_likes_path(obj), method: :POST, remote: true, class: "love hide-text" %>
+                <% end %>
+              </div>
+            <% else %>
+              <%= link_to new_user_session_path,"data-turbolinks": false do %>
+                <div class="love hide-text"></div>
               <% end %>
             <% end %>
-            
-            <div class="card-body">
-            
-                <%= link_to post_path(obj),class: "black-color no-text-decoration" do %><strong class="card-text max-350px"><%= obj.caption%></strong><% end %>
-              <br>
-              <div class="row parts">
+            <%# ==========ここまで編集する========== %>
 
-                <%# ==========ここから編集する========== %>
-                <% if current_user %>
-                  <div id="like-icon-post-<%= obj.id.to_s %>">
-                    <% if obj.liked_by(current_user).present? %>
-                    
-                      <%= link_to "いいねを取り消す", post_like_path(obj.id, obj.liked_by(current_user)), method: :DELETE, remote: true, class: "loved hide-text" %>
-                      
-                      
+            <%= link_to "", new_rep_path(obj), class: "comment" %>
+          </div>
+
+          <%# ==========ここから編集する========== %>
+          
+          <br>
+          <p class="sample"></p>
+          <h5>
+            <% if obj.rights.first %>
+              <% max = obj.rights.pluck(:point).max %>
+              <% right = obj.rights.find_by(point: max)%>
+              <small class="max-350px">
+                <strong>
+                  
+                  <%= link_to user_path(right.user) do %>
+                
+                
+                
+                    <% if right.user.profile_photo.attached? %>
+        
+                      <%= image_tag right.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-index-profile-icon" %>
                     <% else %>
-                      <%= link_to "いいね", post_likes_path(obj), method: :POST, remote: true, class: "love hide-text" %>
+                      <img src="/assets/avatar.png" class="post-index-profile-icon" />
                     <% end %>
-                  </div>
-                <% else %>
-                  <%= link_to new_user_session_path,"data-turbolinks": false do %>
-                    <div class="love hide-text"></div>
                   <% end %>
-                <% end %>
-                <%# ==========ここまで編集する========== %>
-
-                <%= link_to "", new_rep_path(obj), class: "comment" %>
-              </div>
-
-              <%# ==========ここから編集する========== %>
-              
+                  
+                    <%= link_to right_path(right),class: "black-color no-text-decoration" do %><%= right.content %><% end %>
+                  
+                </strong>
+              </small>
+            <% else %>
+            　<small><strong>権利チップはありません</strong></small>
               <br>
-              <p class="sample"></p>
-              <h5>
+            <% end %>
+          </h5>
+          <br>
+          
+            <div class="row">
+              <div class="col-4 text-center">
+                <h5 class="card-title text-center">
+                  <% if obj.rights.first%>
+                    <h7 class="text-center"><small><strong class="max-150px"><i class="fas fa-coins"></i><%= right.point %></strong></small></h7>
+                  <% else %>
+                    <h7><small><strong>chipなし</strong></small></h7>
+                  <% end %>
+                </h5>
+              </div>
+              <div class="col-8">
+                <h6 class="card-title text-center">
+                  
+                  <% if obj.rights.first and right.criterions.first %>
+                    <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
+                    <div class="bg-graf">
+                      <% if ar >= 100 %>
+                        <div class="item item1" style="width: 100%;">
+                          <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                        </div>
+                      <% else %>
+                        <div class="item item1" style="width: <%= ar.round%>%;">
+                          <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <div class="bg-graf">
+                      <div class="item item1" style="width: 0%;">
+                        <span class="item_label"><small><strong>達成率:0%</strong></small></span>
+                      </div>
+                    </div>
+                  <% end %>
+                </h6>
+              </div>
+              <div class="col-4">
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              
+              
+              <div class="col-4 text-center">
+                <%= link_to new_right_path(obj), class: "black-color text-center","data-turbolinks": false do %>
+                  <br>
+                      
+                    <h7><i class="fas fa-fist-raised my-black"></i> <small><strong>依頼</strong></small></h7>
+                  </br>
+                <% end %>
+              </div>
+              <div class="col-4 text-center">
+                <% if current_user != obj.user %>
+                  <%= link_to new_support_path(obj), class: "black-color text-center" do %>
+                    <br>
+                      <h7><i class="far fa-thumbs-up my-black"></i> <small><strong>応援</strong></small></h7>
+                      
+                    </br>
+                  <% end %>
+                <% else %>
+                <% end %>
+              </div>
+              <div class="col-4 text-center">
+                
+                
+
                 <% if obj.rights.first %>
                   <% max = obj.rights.pluck(:point).max %>
                   <% right = obj.rights.find_by(point: max)%>
-                  <small class="max-350px">
-                    <strong>
-                      
-                      <%= link_to user_path(right.user) do %>
-                    
-                    
-                    
-                        <% if right.user.profile_photo.attached? %>
-            
-                          <%= image_tag right.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-index-profile-icon" %>
-                        <% else %>
-                          <img src="/assets/avatar.png" class="post-index-profile-icon" />
-                        <% end %>
-                      <% end %>
-                      <%= link_to right_path(right),class: "black-color no-text-decoration" do %><%= right.content %><% end %>
-                    </strong>
-                  </small>
-                <% else %>
-                　<small><strong>現在の権利チップはありません</strong></small>
-                  <br>
-                <% end %>
-              </h5>
-              <br>
-              
-                <div class="row">
-                  <div class="col-4 text-center">
-                    <h5 class="card-title text-center">
-                      <% if obj.rights.first%>
-                        <h7 class="text-center"><small><strong><i class="fas fa-coins"></i><%= right.point %></strong></small></h7>
-                      <% else %>
-                        <h7><small><strong>chipなし</strong></small></h7>
-                      <% end %>
-                    </h5>
-                  </div>
-                  <div class="col-8">
-                    <h6 class="card-title text-center">
-                      
-                      <% if obj.rights.first and right.criterions.first %>
-                        <% ar = right.sympathies.length / right.criterions.first.sp.to_f * 100 %>
-                        <div class="bg-graf">
-                          <% if ar >= 100 %>
-                            <div class="item item1" style="width: 100%;">
-                              <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
-                            </div>
-                          <% else %>
-                            <div class="item item1" style="width: <%= ar.round%>%;">
-                              <span class="item_label"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
-                            </div>
-                          <% end %>
-                        </div>
-                      <% else %>
-                        <div class="bg-graf">
-                          <div class="item item1" style="width: 0%;">
-                            <span class="item_label"><small><strong>達成率:0%</strong></small></span>
-                          </div>
-                        </div>
-                      <% end %>
-                    </h6>
-                  </div>
-                  <div class="col-4">
-                    
-                  </div>
-                </div>
-                
-                <div class="row">
-                  
-                  
-                  <div class="col-4 text-center">
-                    <%= link_to new_right_path(obj), class: "black-color text-center","data-turbolinks": false do %>
-                      <br>
-                          
-                        <h7><i class="fas fa-fist-raised my-black"></i> <small><strong>依頼</strong></small></h7>
-                      </br>
-                    <% end %>
-                  </div>
-                  <div class="col-4 text-center">
-                    <% if current_user != obj.user %>
-                      <%= link_to new_support_path(obj), class: "black-color text-center" do %>
+                  <% if current_user == right.post.user && right.criterions.first%>
+          
+                  <% elsif current_user == right.post.user && right.criterions.first.nil? %>
+                      <%= link_to new_criterion_path(right),class: "black-color no-text-decoration" do %>
                         <br>
-                          <h7><i class="far fa-thumbs-up my-black"></i> <small><strong>サポ</strong></small></h7>
-                          
+                          <h7><i class="fas fa-hand-lizard my-black"></i> <small><strong>基準</strong></small></h7>
                         </br>
                       <% end %>
-                    <% else %>
-                    <% end %>
-                  </div>
-                  <div class="col-4 text-center">
-                    
-                    
-
-                    <% if obj.rights.first %>
-                      <% max = obj.rights.pluck(:point).max %>
-                      <% right = obj.rights.find_by(point: max)%>
-                      <% if current_user == right.post.user && right.criterions.first%>
-              
-                      <% elsif current_user == right.post.user && right.criterions.first.nil? %>
-                          <%= link_to new_criterion_path(right),class: "black-color no-text-decoration" do %>
-                            <br>
-                              <h7><i class="fas fa-hand-lizard my-black"></i> <small><strong>基準</strong></small></h7>
-                            </br>
-                          <% end %>
-                      <% elsif right.criterions.first %>
-                          <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
-                            <br>
-                              <h7><i class="fas fa-heartbeat my-black"></i> <small><strong>共感</strong></small></h7>
-                            </br>
-                          <% end %>
-                      <% else %>
+                  <% elsif right.criterions.first %>
+                      <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                        <br>
+                          <h7><i class="fas fa-heartbeat my-black"></i> <small><strong>共感</strong></small></h7>
+                        </br>
                       <% end %>
-                    <% end %>
-                      
-                    
-                  </div>
-                </div>
-              </br>
+                  <% else %>
+                  <% end %>
+                <% end %>
+                  
+                
+              </div>
             </div>
-          </div>
-            
-          
-            
+          </br>
         </div>
-                 
-      <% end %>
+      </div>
+        
       
+        
     </div>
-    
-    <div class="text-center">
-      <%= paginate @posts %>
-    </div>
-    
+              
+  <% end %>
+  
 </div>
+
+<div class="text-center">
+  <%= paginate @posts %>
+</div>
+     
+
 
 
 

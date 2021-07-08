@@ -1,0 +1,143 @@
+<br>
+<br>
+<div class="text-center">
+  <h5><strong>以下のクリエイターの投稿に対して応援購入を行いました！引き続きこのクリエイターを応援していきましょう！！！</strong></h5>
+</div>
+<br>
+<br>
+<div class="container">
+  
+  <div class="card mb-3 button" style="max-width: 540px;">
+    <div class="row">
+      
+      <div class="col-md-7">
+      
+        
+        <section>
+            
+          <div class="carousel">
+              <% number = 1 %>
+              <% @post.images.each do |image| %>
+                <input type="radio" name="slides" id="slide-<%= number %>">
+                <% number += 1%>
+              <% end %>
+              
+              <ul class="carousel__slides">
+                <% @post.images.each do |img| %>
+                  
+                  <li class="carousel__slide">
+                      <figure>
+                        <div class="card border-blue">
+                          
+                          <%= image_tag img.variant(resize_to_fill: [1580, 1080]), class: "card-img-top" %>
+                          
+                        </div>
+                      </figure>
+                  </li>
+                  
+                  
+                  
+                  
+                  
+                <% end %>
+              </ul> 
+              
+              <ul class="carousel__thumbnails">
+                <div class="container"> 
+                  <div class="row">  
+                    <% i = 1 %>
+                    <% @post.images.each do |photo| %>
+                      <li>
+                          <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1180, 1080]) %></label>
+                      </li>
+                      <% i += 1%>
+                    <% end %>
+                  </div>
+                </div>
+              </ul>
+              
+          </div>
+            
+        </section>
+  
+      </div>
+      <div class="col-md-5 bg-black">
+        <div class="card-body">
+
+          <%= link_to user_path(@post.user), class: "black-color no-text-decoration" do %>
+                    
+                        
+                        
+            <% if @post.user.profile_photo.attached? %>
+
+              <%= image_tag @post.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+            <% else %>
+              <img src="/assets/avatar.png" class="post-profile-icon" />
+            <% end %>
+            <strong><span class="white-color"><%= @post.user.name%></span></strong>
+
+
+              
+            
+          <% end %>
+          <h6 class="card-text white"><%= @post.caption%></h6>
+          <br>
+          <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>応援購入総額</span></strong></h6>
+          <div class="text-center">
+            <% if @post.csupports.first %>
+              <% array = @post.csupports.pluck(:point) %>
+              <h3 class="card-text white amatic"><%= array.sum %>ポイント</h3>
+            <% else %>
+              <h3 class="card-text white amatic">0ポイント</h3>
+            <% end %>
+          </div>
+
+          <% if @post.csupports.first %>
+            <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h3 class="card-text white amatic"><%= @post.csupports.length %></h3>
+            </div>
+          <% else %>
+            <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h3 class="card-text white amatic">0人</h3>
+            </div>
+          <% end %>
+          
+          <div class="row">
+            <% if @post.likes.first %>
+              <br>
+                <h5 class="card-text white amatic"><i class="far fa-heart"></i>  <%= @post.likes.length%></h5>
+              </br>
+            <% else %>
+              <br>
+                <h5 class="card-text white amatic"><i class="far fa-heart"></i>  0</h5>
+              </br>
+            <% end %>
+            <% if @post.reps.first %>
+              <br>
+                <h5 class="card-text white margin amatic"><i class="far fa-comments"></i>  <%= @post.reps.length%></h5>
+              </br>
+            <% else %>
+              <br>
+                <h5 class="card-text white margin amatic"><i class="far fa-comments"></i>  0</h5>
+              </br>
+            <% end %>
+          
+          
+          </div>
+          <div class="text-center">
+            <% if current_user != @post.user%>
+              <%= link_to new_support_path(@post),class: "black-color no-text-decoration" do %>
+                <br><button type="button" class="btn btn-warning"><span class="white-color">応援購入する</span></button></br>
+              <% end %>
+            <% end %>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>

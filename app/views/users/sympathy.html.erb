@@ -11,7 +11,7 @@
 </div>
   <br>
     <h4 class="amatic"><strong><%= @user.name%></strong></h4>
-    <% psum = P.where(owner: @user.id).pluck(:point).sum %>
+    <% psum = Csupport.where(owner: @user.id).pluck(:point).sum %>
     <% pzsum = Pz.where(owner:@user.id).pluck(:point).sum%>
     <h4><strong>獲得ポイント： <%= psum + pzsum%>pt</strong></h4>
   <small><strong><%= @user.info%></strong></small>
@@ -216,10 +216,16 @@
                             <%= link_to new_sympathy_path(right),class: "black-color no-text-decoration","data-turbolinks": false do %>
                               <button type="button" class="btn btn-warning"><span class="white-color">共感購入する(共感締め切りまであと<%= @hagetakohagetakohagetako %>日)</span></button>
                             <% end %>
+                          <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako <0 && right.zipfiles.first%>
+                            <br>
+                            <%= link_to zipfile_path(right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                              <button type="button" class="btn btn-warning text-center"><span class="white-color">購入する</span></button>
+                            <% end %>
+                            </br>
                           <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 %>
                             
                             <br>
-                              <button type="button" class="btn btn-warning text-center"><span class="white-color">共感は締め切られました</span></button>
+                              <strong class="white-color">共感は締め切られました</strong>
                             </br>
                             
                           <% else %>

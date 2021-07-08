@@ -16,7 +16,7 @@
   </div>
   <br>
   <h4 class="amatic"><strong><%= @user.name %></strong></h4>
-  <% psum = P.where(owner: @user.id).pluck(:point).sum %>
+  <% psum = Csupport.where(owner: @user.id).pluck(:point).sum %>
   <% pzsum = Pz.where(owner:@user.id).pluck(:point).sum%>
   <h4><strong>獲得ポイント： <%= psum + pzsum%>pt</strong></h4>
   <small><strong><%= @user.info%></strong></small>

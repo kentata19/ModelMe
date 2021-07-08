@@ -1,0 +1,15 @@
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.7.3/ext/bootsnap
+/Users/kentata19/.rbenv/versions/2.6.6/bin/ruby -I /Users/kentata19/.rbenv/versions/2.6.6/lib/ruby/2.6.0 -r ./siteconf20210411-1004-ken8pv.rb extconf.rb
+creating Makefile
+
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.7.3/ext/bootsnap
+make "DESTDIR=" clean
+
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.7.3/ext/bootsnap
+make "DESTDIR="
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.bundle
+
+current directory: /Users/kentata19/Desktop/ModelWeb/ModelWeb/vendor/bundle/ruby/2.6.0/gems/bootsnap-1.7.3/ext/bootsnap
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bootsnap.bundle ./.gem.20210411-1004-173z80a/bootsnap

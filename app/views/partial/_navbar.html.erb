@@ -13,6 +13,7 @@
   <ul class="nav-links">
       <li><a href="/posts">ホーム</a></li>
       <li><a href="/reviews">レビュー</a></li>
+      <li><a href="/rights">制作依頼</a></li>
       <% if current_user %>
         <li><%= link_to "マイページ", user_path(current_user),"data-turbolinks": false %></li>
       <% else %>
@@ -39,7 +40,7 @@
         <% end %>
       <% end %>
       <li><%= link_to "プロフィール編集", edit_user_registration_path, "data-turbolinks": false %></li>
-      <li><a href="/posts/search">Search</a></li>
+      <li><a href="/posts/search">検索</a></li>
   </ul>
 
 </nav>

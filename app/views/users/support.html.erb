@@ -10,7 +10,7 @@
   </div>
   <br>
   <h4 class="amatic"><strong><%= @user.name%></strong></h4>
-  <% psum = P.where(owner: @user.id).pluck(:point).sum %>
+  <% psum = Csupport.where(owner: @user.id).pluck(:point).sum %>
   <% pzsum = Pz.where(owner:@user.id).pluck(:point).sum%>
   <h4><strong>獲得ポイント： <%= psum + pzsum%>pt</strong></h4>
   <small><strong><%= @user.info%></strong></small>
@@ -49,8 +49,8 @@
           
           <br>
           <div class="card-group">
-            <% @user.ps.each do |p| %>
-              <% support = Support.find(p.support_id) %>
+            <% @user.csupports.each do |p| %>
+              <% support = Support.find(Csupport.find_by(support_id: p.support_id).support_id)%>
               <% post = Post.find(p.post_id) %>
                 <br>
                   <div class="card mb-3" style="max-width: 540px;">

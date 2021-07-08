@@ -1,23 +1,307 @@
-<div class="container">
-    <div class="text-center  bg-mario">
-      <br>
-      <br>
-        <h2 class="text-center amatic">NEW REVIEW</h2>
-      </br>
-      <br>
+<div class="text-center  bg-mario">
+  <br>
+  <br>
+    <h3 class="text-center amatic"><作品の感想を共有する！></h3>
+  </br>
+  <br>
+</div>
+<div class="container"> 
+  
+  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row">
+      
+      <div class="col-md-7">
+       
+        
+        <section>
+            
+          <div class="carousel">
+              <% number = 1 %>
+              <% if @right.images.attached? %>
+                <% @right.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% else %>
+                <% @right.post.images.each do |image| %>
+                  <input type="radio" name="slides" id="slide-<%= number %>">
+                  <% number += 1%>
+                <% end %>
+              <% end %>
+              
+              <ul class="carousel__slides">
+                <% if @right.images.attached? %>
+                  <% @right.images.each do |img| %>
+                    <li class="carousel__slide">
+                        <figure>
+                          <div class="card border-blue">
+                            <%= image_tag img.variant(resize_to_fill: [1580, 1080]), class: "card-img-top" %>
+                          </div>
+                        </figure>
+                    </li>
+                  <% end %>
+                <% else %>
+                  <% @right.post.images.each do |img| %>
+                    <li class="carousel__slide">
+                        <figure>
+                          <div class="card border-blue">
+                            <%= image_tag img.variant(resize_to_fill: [1580, 1080]), class: "card-img-top" %>
+                          </div>
+                        </figure>
+                    </li>
+                  <% end %>
+                <% end %>
+              </ul> 
+              
+              <ul class="carousel__thumbnails">
+                <div class="container"> 
+                  <div class="row">  
+                    <% i = 1 %>
+                    <% if @right.images.attached? %>
+                      <% @right.images.each do |photo| %>
+                        <li>
+                            <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1180, 1080]) %></label>
+                            
+                              
+                            
+                        </li>
+                        <% i += 1%>
+                      <% end %>
+                    <% else %>
+                      <% @right.post.images.each do |photo| %>
+                        <li>
+                            <label for="slide-<%= i %>"><%= image_tag photo.variant(resize_to_fill: [1180, 1080]) %></label>
+                          
+                              
+                            
+                        </li>
+                        <% i += 1%>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </ul>
+              
+          </div>
+            
+        </section>
+  
+      </div>
+      <div class="col-md-5 bg-black">
+        <div class="card-body">
+          
+          <%= link_to user_path(@right.post.user), class: "black-color no-text-decoration" do %>
+                      
+                          
+                          
+            <% if @right.post.user.profile_photo.attached? %>
+
+              <%= image_tag @right.post.user.profile_photo.variant(resize_to_fill: [1080, 1080]), class: "post-profile-icon" %>
+            <% else %>
+              <img src="/assets/avatar.png" class="post-profile-icon" />
+            <% end %>
+            <strong><span class="white-color"><%= @right.post.user.name%></span></strong>
+
+
+              
+            
+          <% end %>
+          <h6 class="card-text white">依頼 : <%= @right.content%></h6>
+          <h6 class="card-text white">ポイント : <%= @right.point%></h6>
+          <br>
+          <h6 class="card-title white-color"><strong><span><i class="fas fa-yen-sign"></i>共感購入総額</span></strong></h6>
+          <div class="text-center">
+            <% if @right.sympathies.first %>
+              <% array = @right.sympathies.pluck(:point) %>
+              <h4 class="card-text white amatic"><%= array.sum %>ポイント</h4>
+            <% else %>
+              <h4 class="card-text white amatic">0ポイント</h4>
+            <% end %>
+          </div>
+
+
+          <% if @right.sympathies.first %>
+            <h6 class="white-color"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h4 class="card-text white amatic"><%= @right.sympathies.length %></h4>
+            </div>
+          <% else %>
+            <h6 class="card-text white"><i class="fas fa-users"></i>サポーター</h6>
+            <div class="text-center">
+              <h4 class="card-text white amatic">0人</h4>
+            </div>
+          <% end %>
+          
+          <br>          
+            <% if @right and @right.criterions.first %>
+              <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+              <br>
+                <h6><span class="white-color"><strong>達成率：<%= ar.round %>%</strong></span></h6>
+              </br>
+
+              <div class="bg-graf">
+                
+                <% if ar >= 100 %>
+                  <div class="item item1" style="width: 100%;">
+                    <span class="item_label white-color"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                  </div>
+                <% else %>
+                  <div class="item item1" style="width: <%= ar.round%>%;">
+                    <span class="item_label white-color"><small><strong>達成率:<%= ar.round %>%</strong></small></span>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <br>
+                <h6><span class="white-color"><strong>達成率：0%</strong></span></h6>
+              </br>
+              <div class="bg-graf">
+                <div class="item item1" style="width: 0%;">
+                  
+                </div>
+              </div>
+            <% end %>
+          </br>
+
+
+
+
+            <% if @right.rejections.first %>
+              
+              <br>
+                <button type="button" class="btn btn-secondary text-center"><span class="white-color">この依頼はキャンセルされました</span></button>
+              </br>
+            <% elsif current_user == @right.post.user && @right.zipfiles.first %>
+              <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を確認する</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @right.definitions.first %>
+              <% @manzi = @right.definitions.first.created_at.strftime("%Y-%m-%d") %>
+              <% @manzimanzi = Date.parse(@manzi) + @right.due - Date.today%>
+              <% @manzimanzimanzi = @manzimanzi.to_i %> 
+
+              <% if @manzimanzimanzi >= 0%>
+                <%= link_to new_zipfile_path(@right), class: "black-color no-text-decoration" do %>
+                  <br>
+                    <button type="button" class="btn btn-warning text-center"><span class="white-color">作品を投稿する(納期まであと<%= @manzimanzimanzi%>日です)</span></button>
+                  </br>
+                <% end %>
+              <% else %>
+                <%= link_to new_zipfile_path(@right), class: "black-color no-text-decoration" do %>
+                  <br>
+                    <button type="button" class="btn btn-warning text-center"><span class="white-color">納期をすぎています。至急作品を投稿してください</span></button>
+                  </br>
+                <% end %>
+              <% end %>
+            <% elsif current_user == @right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako >= 0 %>
+              
+              <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+              <%= link_to new_rejection_path(@right), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">依頼をキャンセルする</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako == -1 %>
+              
+              <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+              <%= link_to new_definition_path(@right), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">最終決定の期限まであと3日</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako == -2 %>
+              
+              <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+              <%= link_to new_definition_path(@right), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">最終決定の期限まであと2日</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako == -3 %>
+              
+              <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+              <%= link_to new_definition_path(@right), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">最終決定の期限まであと1日</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @hagetakohagetakohagetako && @hagetakohagetakohagetako < -3 %>
+              
+              <% ar = @right.sympathies.length / @right.criterions.first.sp.to_f * 100 %>
+              <%= link_to new_definition_path(@right), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">早急に最終決定してください</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user == @right.post.user && @right.criterions.first.nil? %>
+              <%= link_to new_criterion_path(@right),class: "black-color no-text-decoration" do %>
+                <button type="button" class="btn btn-warning"><span class="white-color">ノルマを設定する</span></button>
+              <% end %>
+            <% elsif current_user && @right.sympathies.pluck(:user_id).include?(current_user.id) && @right.zipfiles.first %>
+              <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">作品をダウンロードする</span></button>
+                </br>
+              <% end %>
+            <% elsif current_user && @right.sympathies.pluck(:user_id).include?(current_user.id) && @right.definitions.first %>
+              <% @manzi1 = @right.definitions.first.created_at.strftime("%Y-%m-%d") %>
+              <% @manzimanzi1 = Date.parse(@manzi1) + @right.due - Date.today%>
+              <% @manzimanzimanzi1 = @manzimanzi1.to_i %>
+              <% if @manzimanzimanzi1 >= 0%>
+                
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">作品はあと<%= @manzimanzimanzi1%>日以内に投稿される予定です。<i class="far fa-grin-beam-sweat"></i></span></button>
+                </br>
+                
+              <% else %>
+                
+                <br>
+                  <button type="button" class="btn btn-warning text-center"><span class="white-color">催促する</span></button>
+                </br>
+                
+              <% end %>
+            <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako >= 0 %>
+              <%= link_to new_sympathy_path(@right),class: "black-color no-text-decoration","data-turbolinks": false do %>
+                <button type="button" class="btn btn-warning"><span class="white-color">共感購入する(共感締め切りまであと<%= @hagetakohagetakohagetako %>日)</span></button>
+              <% end %>
+            <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0 && @right.zipfiles.first %>
+              
+              <br>
+              <%= link_to zipfile_path(@right.zipfiles.first), class: "black-color no-text-decoration" do %>
+                <button type="button" class="btn btn-warning text-center"><span class="white-color">購入する</span></button>
+              <% end %>
+              </br>
+            
+            <% elsif @hagetakohagetakohagetako && @hagetakohagetakohagetako < 0  %>
+              <strong class="white-color">共感は締め切られました</strong>
+            <% else %>
+              <strong class="white-color">クリエイターからの反応はありません</strong>
+            <% end %>
+            <%= link_to  "https://twitter.com/share?url=#{request.url}&text=#{ @right.content }", title: 'Twitter', target: '_blank' do%>
+              <br><h3><i class="fab fa-twitter"></i></h3><small><span class="white-color">twitterでシェア</span></small></br>
+            <% end %>
+        </div>
+      </div>
+      
     </div>
+  </div>
+  
+</div>
+<div class="container">
 
     
     <br> 
     <%= form_with model: @review, local:true, class:"contact-form row" do |form| %>
       <div class="form-field col-12">
         <%= form.text_field :caption, id: "caption", class: "input-text js-input", :required => true  %>
-        <label class="label text-center" for="name">オモイを共有する</label>
+        <label class="label text-center" for="name">感想を共有する(ダウンロード後どのように活用しているかなどを共有しましょう！)</label>
       </div>
       <div class="form-field col-12">
         <label class="label" for="message">Photo(画像は最大6枚まで保存できます。必ず1マイは選択してください)</label>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev0",class:"hidden" %>
         </div>
@@ -25,7 +309,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img0', :required => true %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev1",class:"hidden" %>
         </div>
@@ -33,7 +317,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img1' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev2",class:"hidden" %>
         </div>
@@ -41,7 +325,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img2' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev3",class:"hidden" %>
         </div>
@@ -49,7 +333,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img3' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev4",class:"hidden" %>
         </div>
@@ -57,7 +341,7 @@
           <%= form.file_field :images, multiple: true, id: 'post_img4' %>
         </br>
       </div>
-      <div class="col-lg-4 col-12 square-avatar">
+      <div class="col-lg-4 col-12">
         <div class="text-center">
           <%= image_tag 'no-image.png', id:"avatar_img_prev5",class:"hidden" %>
         </div>

@@ -4,8 +4,13 @@
     <div class="text-center  bg-mario">
       <br>
       <br>
-        <h2 class="text-center amatic">Right Chip</h2>
+        <h3 class="text-center amatic"><作品依頼></h3>
       </br>
+      <br>
+      <div class="text-center">
+        <h7><strong>※制作を依頼する際は必ずクライアントガイドラインを遵守してください。詳しくは、<a href="/policies/client">こちら</a>を確認ください。</strong></h7>
+      </div>
+      <br>
       <br>
     </div>
     
@@ -15,26 +20,26 @@
           <br>
           <br>
           <%= form.text_area :content, id: "content", class: "text-center input-text js-input", :required => true  %>
-          <label class="label text-center" for="name">依頼内容(150字以内で)</label>
+          <label class="label text-center" for="name">依頼内容(150字以内で簡潔に。⚠️投稿に関連する内容で)</label>
         </div>
         <div class="form-field col-12">
           <%= form.number_field :point, id: "caption", class: "text-center input-text js-input", :required => true%>
-          <label class="label" for="message">Point</label>
+          <label class="label" for="message">金額</label>
         </div>
         <div class="form-field col-12">
           <%= form.number_field :deadline, id: "deadline", class: "text-center input-text js-input", min: 1, :required => true%>
-          <label class="label" for="message">共感可能日数(日)</label>
+          <label class="label" for="message">共感可能日数(他のユーザーが共感することのできる日数)</label>
         </div>
         <div class="form-field col-12">
           <%= form.number_field :due, id: "due", class: "text-center input-text js-input", min: 1, :required => true%>
-          <label class="label" for="message">納期期間(日)</label>
+          <label class="label" for="message">納期期間(クリエイターが依頼を受注してから作品を納期するまでの期限)</label>
         </div>
         <div class="form-field col-12">
           <label class="label" for="message">Photo(画像は最大6枚まで保存できます。)</label>
         </div>
         
         
-        <div class="col-lg-4 col-12 square-avatar">
+        <div class="col-lg-4 col-12">
           <div class="text-center">
             <%= image_tag 'no-image.png', id:"avatar_img_prev0",class:"hidden" %>
           </div>
@@ -42,7 +47,7 @@
             <%= form.file_field :images, multiple: true, id: 'post_img0' %>
           </br>
         </div>
-        <div class="col-lg-4 col-12 square-avatar">
+        <div class="col-lg-4 col-12">
           <div class="text-center">
             <%= image_tag 'no-image.png', id:"avatar_img_prev1",class:"hidden" %>
           </div>
@@ -50,7 +55,7 @@
             <%= form.file_field :images, multiple: true, id: 'post_img1' %>
           </br>
         </div>
-        <div class="col-lg-4 col-12 square-avatar">
+        <div class="col-lg-4 col-12">
           <div class="text-center">
             <%= image_tag 'no-image.png', id:"avatar_img_prev2",class:"hidden" %>
           </div>
@@ -58,7 +63,7 @@
             <%= form.file_field :images, multiple: true, id: 'post_img2' %>
           </br>
         </div>
-        <div class="col-lg-4 col-12 square-avatar">
+        <div class="col-lg-4 col-12">
           <div class="text-center">
             <%= image_tag 'no-image.png', id:"avatar_img_prev3",class:"hidden" %>
           </div>
@@ -66,7 +71,7 @@
             <%= form.file_field :images, multiple: true, id: 'post_img3' %>
           </br>
         </div>
-        <div class="col-lg-4 col-12 square-avatar">
+        <div class="col-lg-4 col-12">
           <div class="text-center">
             <%= image_tag 'no-image.png', id:"avatar_img_prev4",class:"hidden" %>
           </div>
@@ -74,7 +79,7 @@
             <%= form.file_field :images, multiple: true, id: 'post_img4' %>
           </br>
         </div>
-        <div class="col-lg-4 col-12 square-avatar">
+        <div class="col-lg-4 col-12">
           <div class="text-center">
             <%= image_tag 'no-image.png', id:"avatar_img_prev5",class:"hidden" %>
           </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_08_090824) do
+ActiveRecord::Schema.define(version: 2021_07_07_081150) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(version: 2021_04_08_090824) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["right_id"], name: "index_criterions_on_right_id"
     t.index ["user_id"], name: "index_criterions_on_user_id"
+  end
+
+  create_table "csupports", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.integer "support_id", null: false
+    t.integer "point"
+    t.integer "owner"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_csupports_on_post_id"
+    t.index ["support_id"], name: "index_csupports_on_support_id"
+    t.index ["user_id"], name: "index_csupports_on_user_id"
   end
 
   create_table "definitions", force: :cascade do |t|
@@ -81,6 +94,7 @@ ActiveRecord::Schema.define(version: 2021_04_08_090824) do
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "zipfile_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -245,6 +259,7 @@ ActiveRecord::Schema.define(version: 2021_04_08_090824) do
     t.string "name", null: false
     t.string "profile_photo"
     t.text "info"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -261,6 +276,9 @@ ActiveRecord::Schema.define(version: 2021_04_08_090824) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "criterions", "rights"
   add_foreign_key "criterions", "users"
+  add_foreign_key "csupports", "posts"
+  add_foreign_key "csupports", "supports"
+  add_foreign_key "csupports", "users"
   add_foreign_key "definitions", "rights"
   add_foreign_key "definitions", "users"
   add_foreign_key "like_reviews", "reviews"

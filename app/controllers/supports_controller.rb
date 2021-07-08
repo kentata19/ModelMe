@@ -12,7 +12,7 @@ class SupportsController < ApplicationController
     if @support.save
       @support_post.create_notification_support!(current_user, @support.id)
       
-      redirect_to credit_support_path(@support)
+      redirect_to new_spayment_path(@support)
       flash[:notice] = "お支払いに移ります ※まだ購入は確定していません"
     else
       redirect_to new_support_path

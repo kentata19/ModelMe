@@ -39,6 +39,10 @@ class RightsController < ApplicationController
       @hagetakohagetako = Date.parse(@hagetako) + @right.deadline - Date.today
       @hagetakohagetakohagetako = @hagetakohagetako.to_i
     end
+    @sympathies = @right.sympathies.order('created_at DESC')
+  end
+  def index
+    @rights = Right.all.order('created_at DESC').page(params[:page]).per(40)
   end
   
   def search

@@ -92,7 +92,14 @@
 @media screen and (min-width:960px){
   .max-350px {
     display: block;
-    width: 250px;
+    width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .max-150px{
+    display: block;
+    width: 80px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -108,6 +115,26 @@
   }
   .js-text_field{
     width: 50%;
+  }
+  //矢印
+  .arrow {
+    display:inline-block;
+    height:30px;
+    width:700px;
+    background-color:#fc8f36;
+    position:relative;
+    top:40px;
+  }
+
+  .arrow:before {
+    position:absolute;
+    content:"";
+    width:0;
+    height:0;
+    border:60px solid transparent;
+    border-left:60px solid #fc8f36;
+    left:700px;
+    top:-45px;
   }
 }
 @media screen and (min-width:600px) and (max-width:960px){
@@ -136,6 +163,26 @@
   }
   .js-text_field{
     width: 80%;
+  }
+  //矢印
+  .arrow {
+    display:inline-block;
+    height:30px;
+    width:200px;
+    background-color:#fc8f36;
+    position:relative;
+    top:40px;
+  }
+
+  .arrow:before {
+    position:absolute;
+    content:"";
+    width:0;
+    height:0;
+    border:60px solid transparent;
+    border-left:60px solid #fc8f36;
+    left:200px;
+    top:-45px;
   }
   
   
@@ -184,6 +231,16 @@
     margin-right: 0px !important;
     max-width: 100% !important;
   }
+  .row .col{
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .col{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  //矢印
+  
 } 
 
 .col-md-5{
@@ -192,8 +249,8 @@
 
 //gradation-border
 .sample {
-  border-image: linear-gradient(90deg, #ff1744 25%, #00e5ff 25%, #00e5ff 50%, #c6ff00 50%, #c6ff00 75%, #ffea00 75%) 1/0 0 4px;
-  border-style: solid;
+  
+  border: 2px solid rgba(0, 0, 0, 0.125);
 }
 
 .sample1 {
@@ -610,3 +667,121 @@ html {
 .pagination>li>a:hover {        
   border-radius: 15px;    /*角を丸くする*/
 }
+
+/*利用規約のデザイン*/
+.Inner {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+p{
+  margin: 0;
+  padding: 0;
+}
+li{
+  list-style: none;
+}
+
+.Inner-Headline {
+  font-weight: bold;
+  font-size: 32px;
+}
+@media screen and (max-width: 480px) {
+  .Inner-Headline {
+    font-size: 24px;
+  }
+}
+.Inner-Text {
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  font-size: 15px;
+}
+.Inner-Text.first {
+  margin-top: 36px;
+}
+.Inner-Box {
+  margin-top: 16px;
+}
+.Inner-Box-Headline {
+  font-weight: bold;
+  font-size: 28px;
+}
+.Inner-Box-Headline2 {
+  font-size: 20px;
+}
+.Inner-Box-Headline3 {
+  font-weight: bold;
+  font-size: 20px;
+}
+@media screen and (max-width: 480px) {
+  .Inner-Box-Headline {
+    font-size: 20px;
+  }
+}
+.Inner-Box-List {
+  margin: 20px 0 0 40px;
+}
+.Inner-Box-List-Item {
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  list-style-type: decimal;
+}
+.Inner-Box-List-Item-Ol {
+  margin: 20px 0 0 40px;
+}
+.Inner-Box-List-Item-Ol-Item {
+  margin-top: 10px;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  list-style-type: decimal;
+}
+.Inner-Box-List-Item-Link {
+  text-decoration: underline;
+  display: inline-block;
+  color: red;
+}
+.Inner-Box-Contact {
+  margin-top: 36px;
+}
+.Inner-Box-Contact-Text {
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  font-size: 15px;
+}
+.Inner-Box-Contact-Text:nth-child(2) {
+  margin-top: 16px;
+}
+.Inner-Box-Item {
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  font-size: 15px;
+}
+@media screen and (max-width: 480px) {
+  .Inner-Box-Item {
+    letter-spacing: inherit;
+    font-size: 14px;
+  }
+}
+
+
+
+
+
+//要素の高さ揃える
+
+.row-eq-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+  
+
+//card-border
+.card-border{
+  border-style: 5px solid black;
+}
+
+
+
+

@@ -12,15 +12,7 @@ class RejectionsController < ApplicationController
   def create
     @rejection = Rejection.new(rejection_params)
     @rejection.save!
-    params[:genre].each do | di1,di2 |
-      if di2 == "1"
-        @rr = Rr.new(
-          rejection_id: @rejection.id,
-          reason_id: di1
-        )
-        @rr.save!
-      end
-    end 
+    
     if @rejection.save!
       redirect_to right_path(@rejection.right)
       flash[:notice] = "投稿が保存されました"
